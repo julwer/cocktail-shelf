@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { LoginRequest, LoginResponse } from '../../model/apiDataTypes';
-import { CocktailModel } from '../../model/cocktailModel';
+import { LoginRequest, LoginResponse } from '../../types/apiDataTypes';
+import { CocktailModel } from '../../types/cocktailModel';
+import { getAccessToken } from '../../authService';
 
 export const api = createApi({
 	reducerPath: 'api',
@@ -20,20 +21,41 @@ export const api = createApi({
 				},
 			}),
 		}),
-		authorize: build.mutation<null, string>({
-			query: (accessToken) => ({
-				url: '',
-				headers: {
-					Authorization: `Bearer ${accessToken}`,
-				},
-			}),
-		}),
 		getCocktails: build.query<Array<CocktailModel>, void>({
 			query: () => ({
 				url: '/drink',
+				headers: {
+					Authorization: `Bearer ${getAccessToken()}`,
+				},
+			}),
+		}),
+		getCocktailDetails: build.query<CocktailModel, string>({
+			query: (cocktailId) => ({
+				url: `drink/${cocktailId}`,
+				headers: {
+					Authorization: `Bearer ${getAccessToken()}`,
+				},
+			}),
+		}),
+		refreshToken: build.mutation<string, string>({
+			query: (refreshToken) => ({
+				url: '',
+				body: {
+					refreshToken: refreshToken,
+				},
+				return: {
+					url: '',
+					method: 'GET',
+					responseType: 'json',
+				},
 			}),
 		}),
 	}),
 });
 
-export const { useLoginMutation, useGetCocktailsQuery } = api;
+export const {
+	useLoginMutation,
+	useGetCocktailsQuery,
+	useGetCocktailDetailsQuery,
+	useRefreshTokenMutation,
+} = api;

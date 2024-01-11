@@ -5,7 +5,6 @@ import { HomePage } from './views/pages/Home';
 import { CocktailDetailPage } from './views/pages/CocktailDetail';
 import { RootLayout } from './views/pages/Root';
 import { ErrorPage } from './views/pages/Error';
-import { useGetCocktailsQuery } from './app/api/logInApiSlice';
 // import { ProtectedRoute } from './views/routes/ProtectedRoute';
 
 const router = createBrowserRouter([
@@ -19,7 +18,7 @@ const router = createBrowserRouter([
 		// </ProtectedRoute>,
 		children: [
 			{ path: '', element: <HomePage /> },
-			{ path: ':productId', element: <CocktailDetailPage /> },
+			{ path: ':cocktailId', element: <CocktailDetailPage /> },
 		],
 	},
 ]);

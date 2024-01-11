@@ -1,17 +1,18 @@
 import { ChangeEvent, ChangeEventHandler, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useLoginMutation } from '../../app/api/logInApiSlice';
-import { LoginRequest as LoginDataType } from '../../model/apiDataTypes';
+import { LoginRequest as LoginDataType } from '../../types/apiDataTypes';
 import {
 	passwordChanged,
 	emailChanged,
 	setCredentials,
-} from '../../state/login/authSlice';
+} from '../../app/state/auth/authSlice';
 import { useDispatch, useSelector, connect } from 'react-redux';
 
 import Header from '../UI/MainText';
 import Input from '../UI/IconInput';
 import Button from '../UI/Button';
+import { setTokens } from '../../authService';
 
 export default function Login() {
 	const dispatch = useDispatch();
@@ -25,6 +26,7 @@ export default function Login() {
 	const isAuthenticated = useSelector(
 		(state: any) => state.auth.isAuthenticated
 	);
+	const credentials = useSelector((state: any) => state.auth.credentials);
 
 	const loginData = {
 		email: emailInputValue,
@@ -45,10 +47,15 @@ export default function Login() {
 
 	useEffect(() => {
 		if (data) {
-			console.log(data);
 			dispatch(setCredentials(data));
 		}
 	}, [data, dispatch]);
+
+	useEffect(() => {
+		if (credentials.accessToken !== '') {
+			setTokens(credentials);
+		}
+	}, [credentials]);
 
 	useEffect(() => {
 		if (isAuthenticated) {

@@ -2,7 +2,7 @@ import { Url } from "url";
 
 export type CocktailModel = {
 	id?: string;
-	img?: Url;
+	imageUrl?: Url;
 	name?: string;
 	description?: string;
 	ingredients?: Array<string>;

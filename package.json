@@ -14,6 +14,8 @@
 		"@types/react-redux": "^7.1.33",
 		"axios": "^1.6.3",
 		"install": "^0.13.0",
+		"js-cookie": "^3.0.5",
+		"jwt-decode": "^4.0.0",
 		"npm": "^10.2.5",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
@@ -50,6 +52,7 @@
 		]
 	},
 	"devDependencies": {
+		"file-loader": "^6.2.0",
 		"tailwindcss": "^3.4.0"
 	}
 }

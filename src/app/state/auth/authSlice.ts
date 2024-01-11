@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { LoginResponse } from '../../model/apiDataTypes';
+import { LoginResponse } from '../../../types/apiDataTypes';
 
 export interface AuthState {
 	user: {
