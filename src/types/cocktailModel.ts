@@ -1,8 +1,8 @@
-import { Url } from "url";
+import { Url } from 'url';
 
 export type CocktailModel = {
 	id?: string;
-	imageUrl?: Url;
+	imageUrl?: string;
 	name?: string;
 	description?: string;
 	ingredients?: Array<string>;

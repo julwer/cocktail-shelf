@@ -1,6 +1,6 @@
-import { ChangeEvent, ChangeEventHandler, useEffect } from 'react';
+import { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useLoginMutation } from '../../app/api/logInApiSlice';
+import { useLoginMutation } from '../../app/api/apiSlice';
 import { LoginRequest as LoginDataType } from '../../types/apiDataTypes';
 import {
 	passwordChanged,
@@ -10,9 +10,9 @@ import {
 import { useDispatch, useSelector, connect } from 'react-redux';
 
 import Header from '../UI/MainText';
-import Input from '../UI/IconInput';
 import Button from '../UI/Button';
 import { setTokens } from '../../authService';
+import IconInput from '../UI/IconInput';
 
 export default function Login() {
 	const dispatch = useDispatch();
@@ -33,16 +33,12 @@ export default function Login() {
 		password: passwordInputValue,
 	} as LoginDataType;
 
-	const handleEmailChange: ChangeEventHandler<HTMLInputElement> = (
-		event: ChangeEvent<HTMLInputElement>
-	) => {
-		dispatch(emailChanged(event.target.value));
+	const handleEmailChange = (email: string) => {
+		dispatch(emailChanged(email));
 	};
 
-	const handlePasswordChange: ChangeEventHandler<HTMLInputElement> = (
-		event: ChangeEvent<HTMLInputElement>
-	) => {
-		dispatch(passwordChanged(event.target.value));
+	const handlePasswordChange = (password: string) => {
+		dispatch(passwordChanged(password));
 	};
 
 	useEffect(() => {
@@ -82,8 +78,10 @@ export default function Login() {
 				h2Txt='Please enter your account here'
 				h2ClassName='mb-4'
 			/>
-			<form className='flex flex-col w-full h-fit items-center'>
-				<Input
+			<form
+				className='flex flex-col w-full h-fit items-center'
+				name='loginForm'>
+				<IconInput
 					placeholder='Email'
 					leadingIcon='mail'
 					inputClassName={inputClasses}
@@ -92,8 +90,9 @@ export default function Login() {
 					onChange={handleEmailChange}
 					value={emailInputValue}
 					inputWidth='full'
+					autocomplete='email'
 				/>
-				<Input
+				<IconInput
 					placeholder='Password'
 					inputClassName={`${inputClasses} my-5`}
 					leadingIcon='lock'
@@ -102,6 +101,7 @@ export default function Login() {
 					onChange={handlePasswordChange}
 					value={passwordInputValue}
 					inputWidth='full'
+					autocomplete='current-password'
 				/>
 				<Button
 					type='button'

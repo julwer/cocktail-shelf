@@ -1,27 +1,20 @@
 import { Link } from 'react-router-dom';
-import IconInput from '../UI/IconInput';
+type NavProps = { children?: any };
 
-export function MainHeader() {
+export function Nav({ children }: NavProps) {
 	const linkClasses: string =
 		'text-main-txt font-bold tracking-wide cursor-pointer text-nowrap hover:tracking-wider active:text-primary active:underline hover:text-primary';
-
 	return (
-		<header className='flex flex-row items-center my-4'>
+		<>
 			<Link
 				to='/home'
-				className={`hover:tracking-widest tracking-wider font-bold w-fit ${linkClasses} px-5`}>
+				className={`hover:tracking-widest tracking-wider font-bold w-fit ${linkClasses}`}>
 				COCKTAIL SHELF
 			</Link>
-			<IconInput
-				placeholder='Search...'
-				inputClassName='bg-form focus:outline-none focus:border-2 focus:border-primary  py-2 px-9 ml-4'
-				inputWidth='auto'
-				leadingIcon='Search'
-				leadingSpanClass='pl-6 pt-2'
-			/>
+			{children}
 			<div className='w-full' />
-			<nav className='flex flex-row gap-6 pr-5'>
-				<Link to={''} className={linkClasses}>
+			<nav className='flex flex-row gap-6'>
+				<Link to={'/home/createCocktail'} className={linkClasses}>
 					Create cocktail
 				</Link>
 				<Link to={''} className={linkClasses}>
@@ -34,6 +27,6 @@ export function MainHeader() {
 					Log out
 				</Link>
 			</nav>
-		</header>
+		</>
 	);
 }

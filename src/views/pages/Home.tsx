@@ -1,29 +1,22 @@
-import { useGetCocktailsQuery } from '../../app/api/logInApiSlice';
-import { CocktailItem } from '../components/CocktailItem';
+import { useState } from 'react';
+import { useGetCocktailsQuery } from '../../app/api/apiSlice';
+import { SearchHeader } from '../components/SearchHeader';
+import { CocktailList } from '../components/CocktailList';
 
 export function HomePage() {
-	const { data, isLoading } = useGetCocktailsQuery();
-	const cocktailArray = data;
+	const [query, setQuery] = useState<string>('');
+	const { data, isLoading } = useGetCocktailsQuery(query);
+
+	const onSearch = (query: string) => {
+		setQuery(query);
+	};
+
 	return (
 		<div>
-			<main className=''>
+			<SearchHeader onSearch={onSearch} searchInput />
+			<main>
 				{isLoading && <p>Cocktails are being fetched...</p>}
-				<ul className='list-none p0 flex flex-wrap w-2/3 mx-auto'>
-					{cocktailArray &&
-						cocktailArray!.map((cocktail: any) => {
-							return (
-								<li key={cocktail.id}>
-									<CocktailItem
-										name={cocktail.name}
-										description={cocktail.description}
-										ingredients={cocktail.ingredients}
-										id={cocktail.id}
-										imageUrl={cocktail.imageUrl}
-									/>
-								</li>
-							);
-						})}
-				</ul>
+				<CocktailList cocktails={data} />
 			</main>
 		</div>
 	);

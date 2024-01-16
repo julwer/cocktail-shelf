@@ -5,20 +5,17 @@ import { HomePage } from './views/pages/Home';
 import { CocktailDetailPage } from './views/pages/CocktailDetail';
 import { RootLayout } from './views/pages/Root';
 import { ErrorPage } from './views/pages/Error';
-// import { ProtectedRoute } from './views/routes/ProtectedRoute';
+import { CreateCocktail } from './views/pages/CreateCocktail';
 
 const router = createBrowserRouter([
 	{ path: '/', element: <LandingPage />, errorElement: <ErrorPage /> },
 	{
 		path: '/home',
-		element: (
-			// <ProtectedRoute>
-			<RootLayout />
-		),
-		// </ProtectedRoute>,
+		element: <RootLayout />,
 		children: [
 			{ path: '', element: <HomePage /> },
 			{ path: ':cocktailId', element: <CocktailDetailPage /> },
+			{ path: 'createCocktail', element: <CreateCocktail /> },
 		],
 	},
 ]);

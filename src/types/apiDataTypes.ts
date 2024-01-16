@@ -8,3 +8,11 @@ export type LoginResponse = {
 	refreshToken: string;
 	expiresIn: number;
 };
+
+export type CreateCocktailRequest = {
+	img: File | null;
+	name: string;
+	description: string;
+	ingredients: Array<string>;
+	instructions: string;
+};

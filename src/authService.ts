@@ -30,3 +30,11 @@ export const isAccesTokenExpired = (accessToken: string): boolean => {
 		return true;
 	}
 };
+
+export const getOwnerId = () => {
+	const accessToken = getAccessToken();
+	if (accessToken) {
+		const ownerId: { sub: string } = jwtDecode(accessToken);
+		return ownerId.sub;
+	}
+};
