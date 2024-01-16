@@ -6,7 +6,6 @@ import {
 } from '../../types/apiDataTypes';
 import { CocktailModel } from '../../types/cocktailModel';
 import { getAccessToken } from '../../authService';
-import { CreateCocktail } from '../../views/pages/CreateCocktail';
 
 export const api = createApi({
 	reducerPath: 'api',
@@ -53,7 +52,7 @@ export const api = createApi({
 					Authorization: `Bearer ${getAccessToken()}`,
 					'Content-Type': 'multipart/form-data;',
 				},
-				body: newCocktail,
+				body: createCocktailRequestToFormData(newCocktail),
 			}),
 		}),
 
@@ -85,7 +84,7 @@ function createCocktailRequestToFormData(
 	newCocktail: CreateCocktailRequest
 ): FormData {
 	const formData = new FormData();
-	// formData.append('image', newCocktail.img);
+	formData.append('image', newCocktail.img);
 	//znależć typ danych dawanych do inputa img
 	formData.append('name', newCocktail.name);
 	formData.append('description', newCocktail.description);
