@@ -1,7 +1,6 @@
 type ButtonProps = {
 	props?: any;
 	className?: string;
-	buttonIcon?: string;
 	children?: any;
 	type?: any;
 	onClick?: any;
@@ -11,7 +10,6 @@ type ButtonProps = {
 export default function Button({
 	onClick,
 	className,
-	buttonIcon,
 	children,
 	type = 'button',
 	disabled,
@@ -19,10 +17,9 @@ export default function Button({
 	let classes = 'rounded-full cursor-pointer ' + className;
 	return (
 		<>
-			{buttonIcon && <span>{buttonIcon}</span>}
 			<button
 				type={type}
-				className={classes}
+				className={className}
 				onClick={onClick}
 				disabled={disabled}>
 				{children}

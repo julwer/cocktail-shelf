@@ -7,6 +7,12 @@ import { RootLayout } from './views/pages/Root';
 import { ErrorPage } from './views/pages/Error';
 import { CreateCocktail } from './views/pages/CreateCocktail';
 import { YourCocktails } from './views/pages/YourCocktails';
+import {
+	getAccessToken,
+	getRefreshToken,
+	isAccessTokenExpired,
+} from './authService';
+import { useGetNewAccessTokenMutation } from './app/api/apiSlice';
 
 const router = createBrowserRouter([
 	{ path: '/', element: <LandingPage />, errorElement: <ErrorPage /> },
@@ -23,6 +29,16 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+	const refreshToken = getRefreshToken();
+	const accessToken = getAccessToken();
+	const isExpired = isAccessTokenExpired(accessToken!);
+
+	const [getNewAccessToken] = useGetNewAccessTokenMutation();
+
+	if (isExpired) {
+		getNewAccessToken(refreshToken!);
+	}
+
 	return <RouterProvider router={router} />;
 }
 

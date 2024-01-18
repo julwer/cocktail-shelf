@@ -107,7 +107,7 @@ export default function Login() {
 				<Button
 					type='button'
 					onClick={loginHandler}
-					className='border-none text-white bg-primary w-full py-2'>
+					className='border-none text-white bg-primary w-full py-2 rounded-full cursor-pointer'>
 					{isLoading ? 'Logging in...' : 'Login'}
 				</Button>
 				<div className='flex flex-row m-2 text-l'>

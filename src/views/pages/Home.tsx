@@ -16,7 +16,7 @@ export function HomePage() {
 			<SearchHeader onSearch={onSearch} />
 			<main>
 				{isLoading && <p>Cocktails are being fetched...</p>}
-				<CocktailList cocktails={data} />
+				<CocktailList cocktails={data} deleteBtn={false}/>
 			</main>
 		</div>
 	);

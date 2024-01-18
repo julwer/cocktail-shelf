@@ -3,8 +3,9 @@ import { LoginResponse } from './types/apiDataTypes';
 import { jwtDecode } from 'jwt-decode';
 
 export const setTokens = (credentials: LoginResponse) => {
+	const decoded: { exp: number } = jwtDecode(credentials.accessToken);
 	Cookies.set('accessToken', credentials.accessToken, {
-		expires: credentials.expiresIn / 86.4,
+		expires: decoded.exp,
 	});
 	Cookies.set('refreshToken', credentials.refreshToken);
 };
@@ -22,7 +23,7 @@ export const clearTokens = () => {
 	Cookies.remove('accessToken');
 };
 
-export const isAccesTokenExpired = (accessToken: string): boolean => {
+export const isAccessTokenExpired = (accessToken: string): boolean => {
 	const decoded: { exp: number } = jwtDecode(accessToken);
 	if (decoded.exp < Date.now()) {
 		return false;
@@ -38,3 +39,4 @@ export const getOwnerId = () => {
 		return ownerId.sub;
 	}
 };
+

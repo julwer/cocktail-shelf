@@ -6,7 +6,6 @@ import {
 } from '../../types/apiDataTypes';
 import { CocktailModel } from '../../types/cocktailModel';
 import { getAccessToken } from '../../authService';
-import { stringify } from 'querystring';
 
 export const api = createApi({
 	reducerPath: 'api',
@@ -15,7 +14,7 @@ export const api = createApi({
 	}),
 	endpoints: (build) => ({
 		login: build.mutation<LoginResponse, LoginRequest>({
-			query: (user) => ({
+			query: (user: LoginRequest) => ({
 				url: '/user/login',
 				method: 'POST',
 				body: user,
@@ -44,7 +43,7 @@ export const api = createApi({
 				},
 			}),
 		}),
-		createCocktail: build.mutation<null, CreateCocktailRequest>({
+		createCocktail: build.mutation<CocktailModel, CreateCocktailRequest>({
 			query: (newCocktail: CreateCocktailRequest) => ({
 				url: 'drink',
 				method: 'POST',
@@ -54,17 +53,22 @@ export const api = createApi({
 				body: createCocktailRequestToFormData(newCocktail),
 			}),
 		}),
-
-		refreshToken: build.mutation<string, string>({
-			query: (refreshToken) => ({
-				url: '',
-				body: {
-					refreshToken: refreshToken,
+		deleteCocktail: build.mutation<null, string>({
+			query: (id: string) => ({
+				url: `drink/${id}`,
+				method: 'DELETE',
+				headers: {
+					Authorization: `Bearer ${getAccessToken()}`,
 				},
-				return: {
-					url: '',
-					method: 'GET',
-					responseType: 'json',
+			}),
+		}),
+
+		getNewAccessToken: build.mutation<LoginResponse, string>({
+			query: (refreshToken: string) => ({
+				url: '/user/refresh',
+				method: 'POST',
+				body: {
+					refreshToken,
 				},
 			}),
 		}),
@@ -75,8 +79,9 @@ export const {
 	useLoginMutation,
 	useGetCocktailsQuery,
 	useGetCocktailDetailsQuery,
-	useRefreshTokenMutation,
+	useGetNewAccessTokenMutation,
 	useCreateCocktailMutation,
+	useDeleteCocktailMutation,
 } = api;
 
 function createCocktailRequestToFormData(

@@ -4,28 +4,37 @@ import { CocktailItem } from './CocktailItem';
 export type CocktailListProps = {
 	cocktails: CocktailModel[] | undefined;
 	deleteBtn: boolean;
+	deleteCocktail?: (id: string) => void;
 };
 
-export function CocktailList({ cocktails, deleteBtn }: CocktailListProps) {
+export function CocktailList({
+	cocktails,
+	deleteBtn,
+	deleteCocktail,
+}: CocktailListProps) {
 	return (
-		<ul className='list-none p0 flex flex-wrap w-2/3 mx-auto justify-center'>
-			{!cocktails || cocktails.length === 0 ? (
-				<p>We don't have cocktail that you're looking for.</p>
-			) : (
-				cocktails!.map((cocktail: any) => {
-					return (
-						<li key={cocktail.id}>
-							<CocktailItem
-								name={cocktail.name}
-								description={cocktail.description}
-								ingredients={cocktail.ingredients}
-								id={cocktail.id}
-								imageUrl={cocktail.imageUrl}
-							/>
-						</li>
-					);
-				})
-			)}
-		</ul>
+		<>
+			{!cocktails ||
+				(cocktails.length === 0 && (
+					<p>We don't have cocktail that you're looking for.</p>
+				))}
+			<ul className='list-none p0 flex flex-wrap w-2/3 mx-auto justify-center'>
+				{cocktails &&
+					cocktails.length > 0 &&
+					cocktails!.map((cocktail: any) => {
+						return (
+							<li key={cocktail.id}>
+								<CocktailItem
+									name={cocktail.name}
+									id={cocktail.id}
+									imageUrl={cocktail.imageUrl}
+									deleteBtn={deleteBtn}
+									deleteCocktail={deleteCocktail}
+								/>
+							</li>
+						);
+					})}
+			</ul>
+		</>
 	);
 }
