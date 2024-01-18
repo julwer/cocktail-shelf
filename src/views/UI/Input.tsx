@@ -10,6 +10,7 @@ export type InputProps = {
 	type?: string;
 	className?: string;
 	autocomplete?: string;
+	accept?: string;
 };
 
 export function Input({
@@ -22,6 +23,7 @@ export function Input({
 	type,
 	className,
 	autocomplete,
+	accept,
 }: InputProps) {
 	const onInputChange = (event: ChangeEvent<HTMLInputElement>) => {
 		onChange && onChange(event);
@@ -42,6 +44,7 @@ export function Input({
 				className={className}
 				value={value}
 				autoComplete={autocomplete}
+				accept={accept}
 			/>
 		</>
 	);

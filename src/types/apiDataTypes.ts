@@ -10,9 +10,9 @@ export type LoginResponse = {
 };
 
 export type CreateCocktailRequest = {
-	img: File | null;
+	img: Blob | string;
 	name: string;
 	description: string;
-	ingredients: Array<string>;
+	ingredients: string[];
 	instructions: string;
 };

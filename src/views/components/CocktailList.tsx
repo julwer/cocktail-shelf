@@ -3,9 +3,10 @@ import { CocktailItem } from './CocktailItem';
 
 export type CocktailListProps = {
 	cocktails: CocktailModel[] | undefined;
+	deleteBtn: boolean;
 };
 
-export function CocktailList({ cocktails }: CocktailListProps) {
+export function CocktailList({ cocktails, deleteBtn }: CocktailListProps) {
 	return (
 		<ul className='list-none p0 flex flex-wrap w-2/3 mx-auto justify-center'>
 			{!cocktails || cocktails.length === 0 ? (

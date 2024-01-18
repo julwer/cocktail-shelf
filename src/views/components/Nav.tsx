@@ -17,7 +17,7 @@ export function Nav({ children }: NavProps) {
 				<Link to={'/home/createCocktail'} className={linkClasses}>
 					Create cocktail
 				</Link>
-				<Link to={''} className={linkClasses}>
+				<Link to={'/home/yourCocktails'} className={linkClasses}>
 					Your coktails
 				</Link>
 				<Link to={''} className={linkClasses}>

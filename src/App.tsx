@@ -6,6 +6,7 @@ import { CocktailDetailPage } from './views/pages/CocktailDetail';
 import { RootLayout } from './views/pages/Root';
 import { ErrorPage } from './views/pages/Error';
 import { CreateCocktail } from './views/pages/CreateCocktail';
+import { YourCocktails } from './views/pages/YourCocktails';
 
 const router = createBrowserRouter([
 	{ path: '/', element: <LandingPage />, errorElement: <ErrorPage /> },
@@ -16,6 +17,7 @@ const router = createBrowserRouter([
 			{ path: '', element: <HomePage /> },
 			{ path: ':cocktailId', element: <CocktailDetailPage /> },
 			{ path: 'createCocktail', element: <CreateCocktail /> },
+			{ path: 'yourCocktails', element: <YourCocktails /> },
 		],
 	},
 ]);

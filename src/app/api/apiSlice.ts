@@ -6,6 +6,7 @@ import {
 } from '../../types/apiDataTypes';
 import { CocktailModel } from '../../types/cocktailModel';
 import { getAccessToken } from '../../authService';
+import { stringify } from 'querystring';
 
 export const api = createApi({
 	reducerPath: 'api',
@@ -18,21 +19,20 @@ export const api = createApi({
 				url: '/user/login',
 				method: 'POST',
 				body: user,
-				return: {
-					url: '/user/login',
-					method: 'GET',
-					responseType: 'json',
-				},
 			}),
 		}),
-		getCocktails: build.query<Array<CocktailModel>, string>({
-			query: (query: string) => ({
+		getCocktails: build.query<
+			Array<CocktailModel>,
+			{ query?: string; ownerId?: string }
+		>({
+			query: ({ query, ownerId }) => ({
 				url: '/drink',
 				headers: {
 					Authorization: `Bearer ${getAccessToken()}`,
 				},
 				params: {
 					query,
+					ownerId,
 				},
 			}),
 		}),
@@ -46,11 +46,10 @@ export const api = createApi({
 		}),
 		createCocktail: build.mutation<null, CreateCocktailRequest>({
 			query: (newCocktail: CreateCocktailRequest) => ({
-				url: '/drink',
+				url: 'drink',
 				method: 'POST',
 				headers: {
 					Authorization: `Bearer ${getAccessToken()}`,
-					'Content-Type': 'multipart/form-data;',
 				},
 				body: createCocktailRequestToFormData(newCocktail),
 			}),
@@ -89,8 +88,15 @@ function createCocktailRequestToFormData(
 	formData.append('name', newCocktail.name);
 	formData.append('description', newCocktail.description);
 	formData.append('instructions', newCocktail.instructions);
-	newCocktail.ingredients.map((ingredient) =>
-		formData.append('ingredients[]', ingredient)
-	);
+	formData.append('ingredients[]', newCocktail.ingredients[0]);
+	console.log(newCocktail.ingredients);
+	newCocktail.ingredients.forEach((ingredient) => {
+		formData.append('ingredients[]', ingredient);
+	});
+
+	// for (const entry of formData.entries()) {
+	// 	console.log('FormData entry:', entry);
+	// }
+
 	return formData;
 }

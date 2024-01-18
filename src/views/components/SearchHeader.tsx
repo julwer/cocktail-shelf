@@ -4,10 +4,9 @@ import { Nav } from './Nav';
 
 type SearchHeaderProps = {
 	onSearch: (query: string) => void;
-	searchInput: boolean;
 };
 
-export function SearchHeader({ onSearch, searchInput }: SearchHeaderProps) {
+export function SearchHeader({ onSearch }: SearchHeaderProps) {
 	const [searchInputValue, setSearchInputValue] = useState('');
 	const [debouncedValue, setDebouncedValue] = useState('');
 
@@ -38,7 +37,7 @@ export function SearchHeader({ onSearch, searchInput }: SearchHeaderProps) {
 					button={true}
 					onSubmit={handleSearch}
 					onTrailingIconClick={handleSearch}
-					onChange={setSearchInputValue}
+					onChangeEvent={(event) => setSearchInputValue(event.target.value)}
 				/>
 			</Nav>
 		</header>

@@ -8,10 +8,11 @@ type IconInputProps = {
 	type?: string;
 	name?: string;
 	id?: string;
+	onChangeEvent?: (event: ChangeEvent<HTMLInputElement>) => void;
 	onChange?: (text: string) => void;
 	placeholder?: string;
 	inputClassName?: string;
-	value?: any;
+	value?: string;
 	inputWidth?: string;
 	button?: boolean;
 	onTrailingIconClick?: () => void;
@@ -27,7 +28,7 @@ export default function IconInput({
 	type,
 	name,
 	id,
-	onChange,
+	onChangeEvent,
 	placeholder,
 	inputClassName,
 	value,
@@ -36,12 +37,13 @@ export default function IconInput({
 	onTrailingIconClick,
 	onSubmit,
 	autocomplete,
+	onChange,
 }: IconInputProps) {
 	const inputClasses = 'rounded-full text-main-txt cursor-pointer ';
-	const onInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+	const onInputChangeEvent = (event: ChangeEvent<HTMLInputElement>) => {
+		onChangeEvent && onChangeEvent(event);
 		onChange && onChange(event.target.value);
 	};
-
 	return (
 		<div className={`flex flex-row relative w-${inputWidth}`}>
 			{leadingIcon && (
@@ -55,7 +57,7 @@ export default function IconInput({
 				type={type}
 				name={name}
 				id={id}
-				onChange={onInputChange}
+				onChange={onInputChangeEvent}
 				placeholder={placeholder}
 				value={value}
 				autoComplete={autocomplete}

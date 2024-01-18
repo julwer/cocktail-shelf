@@ -102,6 +102,7 @@ export default function Login() {
 					value={passwordInputValue}
 					inputWidth='full'
 					autocomplete='current-password'
+					type='password'
 				/>
 				<Button
 					type='button'

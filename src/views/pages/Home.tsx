@@ -5,7 +5,7 @@ import { CocktailList } from '../components/CocktailList';
 
 export function HomePage() {
 	const [query, setQuery] = useState<string>('');
-	const { data, isLoading } = useGetCocktailsQuery(query);
+	const { data, isLoading } = useGetCocktailsQuery({ query });
 
 	const onSearch = (query: string) => {
 		setQuery(query);
@@ -13,7 +13,7 @@ export function HomePage() {
 
 	return (
 		<div>
-			<SearchHeader onSearch={onSearch} searchInput />
+			<SearchHeader onSearch={onSearch} />
 			<main>
 				{isLoading && <p>Cocktails are being fetched...</p>}
 				<CocktailList cocktails={data} />

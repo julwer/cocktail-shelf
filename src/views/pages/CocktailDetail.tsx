@@ -25,12 +25,14 @@ export function CocktailDetailPage() {
 								</li>
 							))}
 						</ul>
-						<h2 className='font-bold text-secondary text-xl pt-8 pb-4'>
+						<h2 className='font-bold text-secondary text-xl pt-8'>
 							Instructions
 						</h2>
-						{/* <p className='px-5 text-justify leading-6 text-main-txt'>{data.instructions}</p> */}
+						<p className='text-justify leading-6 text-main-txt pb-8'>
+							{data.instructions}
+						</p>
 					</section>
-					<section className='overflow-hidden h-screen rounded-tl-3xl'>
+					<section className='overflow-hidden h-3/4 w-3/4 rounded-xl self-center justify-self-center '>
 						<img
 							src={`${data.imageUrl}`}
 							alt={`${data.name}`}

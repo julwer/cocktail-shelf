@@ -2,40 +2,95 @@ import { useState } from 'react';
 import Button from '../UI/Button';
 import { Input } from '../UI/Input';
 import { useCreateCocktailMutation } from '../../app/api/apiSlice';
+import { CreateCocktailRequest } from '../../types/apiDataTypes';
+import { HandleIngredients } from './HandleIngredients';
+
+// type CocktailFormState = {
+// 	name: string;
+// 	description: string;
+// 	ingredients: string[];
+// 	instructions: string;
+// };
+
+type imgState = { imgFile?: File | null; imgPreview: string };
 
 export function CocktailForm() {
-	const initialInputsState = {
-		img: null,
-		name: '',
-		description: '',
-		ingredients: [],
-		instructions: '',
-	};
-	const [inputValue, setInputValue] = useState(initialInputsState);
-	const [createCocktail, { isLoading }] = useCreateCocktailMutation();
+	const [createCocktail, { isLoading, data, isError }] =
+		useCreateCocktailMutation();
+	const [img, setImg] = useState<imgState>({
+		imgFile: null as File | null,
+		imgPreview: '',
+	});
+	const [name, setName] = useState<string>('');
+	const [description, setDescription] = useState<string>('');
+	const [inputArray, setInputArray] = useState<string[]>([]);
+	const [instructions, setInstructions] = useState<string>('');
 
-	const handleInputChange = (
-		event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+	const newCocktail: CreateCocktailRequest = {
+		img: img.imgFile!,
+		name: name,
+		description: description,
+		ingredients: inputArray,
+		instructions: instructions,
+	};
+
+	const handleFileInputChange = (
+		event: React.ChangeEvent<HTMLInputElement>
 	) => {
-		const { name, value } = event.target;
-		setInputValue({ ...inputValue, [name]: value });
+		const file = event.target.files && event.target.files[0];
+
+		if (file) {
+			setImg({
+				...img,
+				imgFile: file,
+				imgPreview: URL.createObjectURL(file),
+			});
+		}
 	};
 
-	//ogarnąć dodawanie plików za pomocą dragOver
+	function setIngredientInput(index: number, text: string) {
+		inputArray[index] = text;
+		console.log('Inside setIngredientInput function: ' + inputArray);
+	}
 
-	const resetInputs = () => setInputValue(initialInputsState);
+	function addIngredientInput() {
+		setInputArray([...inputArray, '']);
+		console.log('Inside addIngredientInput function: ' + inputArray);
+	}
+	//to powoduje submitowanie forma => wywołanie funkcji handleSubmit
 
-	const handleSubmit = (event: React.SyntheticEvent) => {
+	function removeIngredientInput(index: number) {
+		const newArray = [...inputArray];
+		newArray.splice(index, 1);
+		setInputArray(newArray);
+		console.log('Inside removeIngredientInput: ' + inputArray);
+	}
+
+	function handleSubmit(event: React.SyntheticEvent) {
 		event.preventDefault();
-		createCocktail(inputValue);
+		console.log(
+			'New cocktail in handle submit before createcocktail ' + newCocktail
+		);
 
-		//przekazać inputValue na backend
-		//po zapisaniu przekazac info że git i wyjść z tej strony na details cocktailu kt został stworzony
-	};
+		createCocktail(newCocktail);
+
+		console.log(
+			'New cocktail in handle submit after createcocktail' + newCocktail
+		);
+		// dodanie nowego inputa powoduje submitowanie całego forma = dodanie nowego produktu = wywołanie funkcji handleSubmit
+	}
+
+	function resetInputs() {
+		setName('');
+		setDescription('');
+		setInputArray([]);
+		setInstructions('');
+	}
 
 	const formClasses: string =
 		'p-4 placeholder:text-second-txt text-main-txt cursor-pointer border border-2 border-outline border-solid p-3 m-4 focus:outline-primary w-full rounded-full';
-	const buttonClasses: string = 'border-none p-3 m-4 w-32 font-bold';
+	const buttonClasses: string =
+		'border-none p-3 m-5 w-32 font-bold hover:text-xl';
 	const labelClasses: string = 'text-main-txt font-bold text-xl self-start';
 	const iconStyle: object = { fontSize: '70px' };
 	return (
@@ -46,20 +101,35 @@ export function CocktailForm() {
 			<label
 				htmlFor='fileInput'
 				className='flex flex-col items-center border-2  border-dashed rounded-md py-10 px-16 cursor-pointer border-outline  hover:border-secondary w-1/2 mb-4'>
-				<span
-					className='material-symbols-outlined text-secondary'
-					style={iconStyle}>
-					image
-				</span>
-				<p className='text-main-txt font-bold mt-4'>Add Cover Photo</p>
+				<div className='w-32 h-32 overflow-hidden flex items-center justify-center rounded-md'>
+					{img.imgPreview !== '' ? (
+						<img
+							src={img.imgPreview}
+							alt='Selected Image'
+							className='w-full h-full object-cover'
+						/>
+					) : (
+						<span
+							className='material-symbols-outlined text-secondary'
+							style={iconStyle}>
+							image
+						</span>
+					)}
+				</div>
+
+				<p className='text-main-txt font-bold mt-4 text-center text-l text-nowrap'>
+					{img.imgPreview !== ''
+						? 'Your photo has been added!'
+						: 'Add Cover Photo'}
+				</p>
 				<Input
 					type='file'
 					className='hidden'
 					id='fileInput'
 					autocomplete='off'
 					name='img'
-					onChange={handleInputChange}
-					value={inputValue.img}
+					onChange={(event) => handleFileInputChange(event)}
+					accept='image/png, image/jpeg'
 				/>
 			</label>
 
@@ -70,8 +140,7 @@ export function CocktailForm() {
 				labelText='Name of cocktail'
 				autocomplete='off'
 				name='name'
-				onChange={handleInputChange}
-				value={inputValue.name}
+				onChange={(event) => setName(event.target.value)}
 			/>
 			<label htmlFor='descriprion' className={labelClasses}>
 				Description
@@ -81,18 +150,13 @@ export function CocktailForm() {
 				className={formClasses}
 				id='description'
 				name='description'
-				onChange={handleInputChange}
-				value={inputValue.description}
+				onChange={(event) => setDescription(event.target.value)}
 			/>
-			<Input
-				placeholder='Ingredients'
-				className={formClasses}
-				id='ingredients'
-				labelText='Ingredients'
-				autocomplete='off'
-				name='ingredients'
-				onChange={handleInputChange}
-				value={inputValue.ingredients}
+			<HandleIngredients
+				inputArray={inputArray}
+				addIngredientInput={addIngredientInput}
+				removeIngredientInput={removeIngredientInput}
+				setIngredientInput={setIngredientInput}
 			/>
 			<label htmlFor='instructions' className={labelClasses}>
 				Instructions
@@ -102,8 +166,7 @@ export function CocktailForm() {
 				className={formClasses}
 				id='instructions'
 				name='instructions'
-				onChange={handleInputChange}
-				value={inputValue.instructions}
+				onChange={(event) => setInstructions(event.target.value)}
 			/>
 			<div className='flex flex-row'>
 				<Button
