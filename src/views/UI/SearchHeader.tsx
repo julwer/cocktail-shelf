@@ -1,4 +1,4 @@
-import IconInput from '../UI/IconInput';
+import IconInput from './IconInput';
 import { useEffect, useState } from 'react';
 import { Nav } from './Nav';
 

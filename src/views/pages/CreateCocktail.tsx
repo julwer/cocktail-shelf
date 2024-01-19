@@ -1,5 +1,5 @@
 import { CocktailForm } from '../components/CocktailForm';
-import { Header } from '../components/Header';
+import { Header } from '../UI/Header';
 
 export function CreateCocktail() {
 	return (

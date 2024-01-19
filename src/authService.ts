@@ -40,3 +40,13 @@ export const getOwnerId = () => {
 	}
 };
 
+// const refreshToken = getRefreshToken();
+// const accessToken = getAccessToken();
+// const isExpired = isAccessTokenExpired(accessToken!);
+
+// const [getNewAccessToken] = useGetNewAccessTokenMutation();
+
+// if (isExpired) {
+// 	getNewAccessToken(refreshToken!);
+// }
+

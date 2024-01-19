@@ -98,10 +98,6 @@ function createCocktailRequestToFormData(
 	newCocktail.ingredients.forEach((ingredient) => {
 		formData.append('ingredients[]', ingredient);
 	});
-
-	// for (const entry of formData.entries()) {
-	// 	console.log('FormData entry:', entry);
-	// }
-
+	
 	return formData;
 }

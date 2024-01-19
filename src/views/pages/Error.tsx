@@ -1,5 +1,5 @@
 import MainText from '../UI/MainText';
-import catImg from '../../img/hiddencat.jpg'
+import catImg from '../../images/hiddencat.jpg'
 
 
 export function ErrorPage() {

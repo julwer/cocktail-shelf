@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import logoPng from '../../img/logo.png';
+import logoPng from '../../images/logo.png';
 
 type NavProps = { children?: any };
 

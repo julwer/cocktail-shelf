@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useGetCocktailDetailsQuery } from '../../app/api/apiSlice';
-import { Header } from '../components/Header';
+import { Header } from '../UI/Header';
 
 export function CocktailDetailPage() {
 	const { cocktailId } = useParams<{ cocktailId?: string }>();

@@ -6,8 +6,8 @@ import {
 import { getOwnerId } from '../../authService';
 import { Snackbar } from '../UI/Snackbar';
 import { CocktailList } from '../components/CocktailList';
-import { Header } from '../components/Header';
-import { SearchHeader } from '../components/SearchHeader';
+import { Header } from '../UI/Header';
+import { SearchHeader } from '../UI/SearchHeader';
 
 export function YourCocktails() {
 	const ownerId: string | undefined = getOwnerId();

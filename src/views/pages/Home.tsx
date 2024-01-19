@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useGetCocktailsQuery } from '../../app/api/apiSlice';
-import { SearchHeader } from '../components/SearchHeader';
+import { SearchHeader } from '../UI/SearchHeader';
 import { CocktailList } from '../components/CocktailList';
 
 export function HomePage() {
@@ -16,7 +16,7 @@ export function HomePage() {
 			<SearchHeader onSearch={onSearch} />
 			<main>
 				{isLoading && <p>Cocktails are being fetched...</p>}
-				<CocktailList cocktails={data} deleteBtn={false}/>
+				<CocktailList cocktails={data} deleteBtn={false} />
 			</main>
 		</div>
 	);
