@@ -72,6 +72,8 @@ export function CocktailForm() {
 		setDescription('');
 		setInputArray([]);
 		setInstructions('');
+		setImg({ ...img, imgFile: null as File | null, imgPreview: '' });
+		//robi się pusty obiekt ale nie robi się puste pola w formie (nie usuwa się wcześniej wpisany kod; tylko w przypadku img input oraz ingredients); najlepiej żeby po tym odświeżył się komponent
 	}
 
 	const formClasses: string =

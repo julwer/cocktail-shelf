@@ -40,7 +40,7 @@ export const authSlice = createSlice({
 			state.credentials = action.payload;
 			state.isAuthenticated = true;
 		},
-		logOut(state: AuthState, action: PayloadAction<void>) {
+		logout(state: AuthState, action: PayloadAction<void>) {
 			state.user.email = '';
 			state.user.password = '';
 			state.credentials.accessToken = '';
@@ -51,5 +51,5 @@ export const authSlice = createSlice({
 	},
 });
 
-export const { passwordChanged, emailChanged, logOut, setCredentials } =
+export const { passwordChanged, emailChanged, logout, setCredentials } =
 	authSlice.actions;

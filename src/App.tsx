@@ -7,15 +7,11 @@ import { RootLayout } from './views/pages/Root';
 import { ErrorPage } from './views/pages/Error';
 import { CreateCocktail } from './views/pages/CreateCocktail';
 import { YourCocktails } from './views/pages/YourCocktails';
-import {
-	getAccessToken,
-	getRefreshToken,
-	isAccessTokenExpired,
-} from './authService';
-import { useGetNewAccessTokenMutation } from './app/api/apiSlice';
+import { SignupPage } from './views/pages/Signup';
 
 const router = createBrowserRouter([
 	{ path: '/', element: <LandingPage />, errorElement: <ErrorPage /> },
+	{ path: 'signup', element: <SignupPage /> },
 	{
 		path: '/home',
 		element: <RootLayout />,
@@ -29,7 +25,6 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-
 	return <RouterProvider router={router} />;
 }
 

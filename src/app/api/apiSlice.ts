@@ -20,6 +20,13 @@ export const api = createApi({
 				body: user,
 			}),
 		}),
+		register: build.mutation<void, LoginRequest>({
+			query: (newUser: LoginRequest) => ({
+				url: '/user/register',
+				method: 'POST',
+				body: newUser,
+			}),
+		}),
 		getCocktails: build.query<
 			Array<CocktailModel>,
 			{ query?: string; ownerId?: string }
@@ -82,6 +89,7 @@ export const {
 	useGetNewAccessTokenMutation,
 	useCreateCocktailMutation,
 	useDeleteCocktailMutation,
+	useRegisterMutation,
 } = api;
 
 function createCocktailRequestToFormData(
@@ -98,6 +106,6 @@ function createCocktailRequestToFormData(
 	newCocktail.ingredients.forEach((ingredient) => {
 		formData.append('ingredients[]', ingredient);
 	});
-	
+
 	return formData;
 }

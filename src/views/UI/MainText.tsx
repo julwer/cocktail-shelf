@@ -14,7 +14,7 @@ export default function MainText({
 	className,
 }: HeaderProps) {
 	return (
-		<div className={className}>
+		<div className={`flex flex-col items-center ${className}`}>
 			<h1 className={`text-main-txt font-bold text-3xl mt-3 ${h1ClassName}`}>
 				{h1Txt}
 			</h1>

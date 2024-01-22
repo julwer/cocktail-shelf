@@ -1,9 +1,18 @@
 import { Link } from 'react-router-dom';
 import logoPng from '../../images/logo.png';
+import { clearTokens } from '../../authService';
+import { useDispatch } from 'react-redux';
+import { logout } from '../../app/state/auth/authSlice';
 
 type NavProps = { children?: any };
 
 export function Nav({ children }: NavProps) {
+	const dispatch = useDispatch();
+
+	function handleLogout() {
+		clearTokens();
+		dispatch(logout());
+	}
 	const linkClasses: string =
 		'text-main-txt font-bold tracking-wide cursor-pointer text-nowrap hover:tracking-wider active:text-primary active:underline hover:text-primary';
 	return (
@@ -25,10 +34,11 @@ export function Nav({ children }: NavProps) {
 				<Link to={''} className={linkClasses}>
 					Profile
 				</Link>
-				<Link to={'/'} className={linkClasses}>
+				<Link to={'/'} className={linkClasses} onClick={handleLogout}>
 					Log out
 				</Link>
 			</nav>
 		</>
 	);
 }
+
