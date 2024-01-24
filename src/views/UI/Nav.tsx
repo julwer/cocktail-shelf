@@ -14,7 +14,7 @@ export function Nav({ children }: NavProps) {
 		dispatch(logout());
 	}
 	const linkClasses: string =
-		'text-main-txt font-bold tracking-wide cursor-pointer text-nowrap hover:tracking-wider active:text-primary active:underline hover:text-primary';
+		'text-main-txt font-bold tracking-wide cursor-pointer text-nowrap transition delay-100  active:text-primary active:underline hover:text-primary';
 	return (
 		<>
 			<Link to='/home'>
@@ -31,7 +31,7 @@ export function Nav({ children }: NavProps) {
 				<Link to={'/home/yourCocktails'} className={linkClasses}>
 					Your coktails
 				</Link>
-				<Link to={''} className={linkClasses}>
+				<Link to={'/home/profile'} className={linkClasses}>
 					Profile
 				</Link>
 				<Link to={'/'} className={linkClasses} onClick={handleLogout}>
@@ -41,4 +41,3 @@ export function Nav({ children }: NavProps) {
 		</>
 	);
 }
-

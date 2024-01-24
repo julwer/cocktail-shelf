@@ -5,16 +5,18 @@ export type CocktailItemProps = {
 	imageUrl: string;
 	name: string;
 	id: string;
-	deleteBtn: boolean;
+	btns: boolean;
 	deleteCocktail?: ((id: string) => void) | undefined;
+	editCocktail?: () => void | undefined;
 };
 
 export function CocktailItem({
 	imageUrl,
 	name,
 	id,
-	deleteBtn,
+	btns,
 	deleteCocktail,
+	editCocktail,
 }: CocktailItemProps) {
 	function removeCocktail() {
 		deleteCocktail!(id);
@@ -30,14 +32,19 @@ export function CocktailItem({
 						className='w-full h-full object-cover '
 					/>
 				</div>
-				{deleteBtn && (
-					<Button
-						className='bg-form/50 w-7 h-7 rounded-md box-content relative left-[-32px] top-2 flex items-center justify-center'
-						onClick={removeCocktail}>
-						<span className='material-symbols-outlined  text-main-txt'>
-							delete
-						</span>
-					</Button>
+				{btns && (
+					<div className='box-content relative left-[-64px] top-2 flex flex-row'>
+						<Button
+							className='bg-form/50 w-7 h-7 rounded-md  flex items-center justify-center hover:text-primary text-main-txt mr-1'
+							onClick={removeCocktail}>
+							<span className='material-symbols-outlined'>delete</span>
+						</Button>
+						<Button
+							className='bg-form/50 w-7 h-7 rounded-md  flex items-center justify-center hover:text-primary text-main-txt'
+							onClick={editCocktail}>
+							<span className='material-symbols-outlined'>edit</span>
+						</Button>
+					</div>
 				)}
 			</div>
 			<Link to={`/home/${id}`}>

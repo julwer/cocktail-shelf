@@ -12,6 +12,7 @@ import {
 import { LoginRequest as SignupDataType } from '../../types/apiDataTypes';
 import { useEffect } from 'react';
 import { setTokens } from '../../authService';
+import logoImg from '../../images/logo.png';
 
 export function Signup() {
 	const dispatch = useDispatch();
@@ -42,6 +43,14 @@ export function Signup() {
 		dispatch(passwordChanged(password));
 		console.log('password' + password);
 	};
+
+	function passwordValidation(): boolean {
+		if (passwordInputValue.length > 7) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 	async function signupHandler(event: React.SyntheticEvent) {
 		event.preventDefault();
@@ -78,13 +87,18 @@ export function Signup() {
 		'outline outline-form focus:outline-primary focus:outline-3 w-full py-2 px-12 ';
 
 	return (
-		<section className='flex flex-col w-full h-full items-center px-4'>
+		<section className='flex flex-col w-full h-[100vh] px-4 justify-center'>
+			<div className='flex flex-col items-center w-full'>
+				<img src={logoImg} alt='logo' className='w-1/2 md:max-md:w-1/4 h-fit p-4' />
+			</div>
 			<MainText
 				h1Txt='Welcome!'
 				h2Txt='Please enter your account here'
 				h2ClassName='mb-4'
 			/>
-			<form className='flex flex-col w-1/2 h-fit items-center' name='loginForm'>
+			<form
+				className='flex flex-col self-center items-center md:max-lg:w-1/2'
+				name='loginForm'>
 				<IconInput
 					placeholder='Email'
 					leadingIcon='mail'
@@ -93,8 +107,9 @@ export function Signup() {
 					name='email'
 					onChange={handleEmailChange}
 					value={emailInputValue}
-					inputWidth='full'
+					inputWidth='[80%]'
 					autocomplete='email'
+					required={true}
 				/>
 				<IconInput
 					placeholder='Password'
@@ -104,26 +119,34 @@ export function Signup() {
 					name='password'
 					onChange={handlePasswordChange}
 					value={passwordInputValue}
-					inputWidth='full'
+					inputWidth='[80%]'
 					autocomplete='current-password'
 					type='password'
+					required={true}
 				/>
 				<div className='text-main-txt mb-4'>
 					<p className='text-l font-bold'>Your password must contain:</p>
-					<span className='material-symbols-outlined bg-form text-second-txt font-bold rounded-full text-m flex items-center justify-center w-fit'>
-						check
-					</span>
-					<p className='ml-2 inline'>At least 8 characters.</p>
+					<div className='flex m-2'>
+						<span
+							className={`material-symbols-outlined text-second-txt font-bold rounded-full text-sm w-5 h-5 flex items-center justify-center ${
+								passwordValidation() ? 'bg-primary' : 'bg-form'
+							}`}>
+							check
+						</span>
+						<p className='ml-2 inline'>At least 8 characters.</p>
+					</div>
 				</div>
 				<Button
 					type='button'
 					onClick={signupHandler}
-					className='border-none text-white bg-primary w-full py-2 rounded-full cursor-pointer'>
+					className='border-none text-white bg-primary w-[80%] py-2 rounded-full cursor-pointer transition ease-in-out delay-150 hover:scale-105'>
 					{isLoading ? 'Signing up...' : 'Sign up'}
 				</Button>
 				<div className='flex flex-row m-2 text-l'>
-					<span className='px-3 text-main-txt'>You already have acount? </span>
-					<Link to='/' className='text-primary font-bold'>
+					<span className='px-3 text-main-txt'>Already have an acount? </span>
+					<Link
+						to='/'
+						className='text-primary font-bold transition ease-in-out delay-150 hover:scale-105'>
 						Log in
 					</Link>
 				</div>

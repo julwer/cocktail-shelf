@@ -30,10 +30,10 @@ export function SearchHeader({ onSearch }: SearchHeaderProps) {
 			<Nav>
 				<IconInput
 					placeholder='Search...'
-					inputClassName='bg-white border border-outline border-solid placeholder:text-second-txt focus:outline-none focus:border-2 focus:border-primary mx-4 py-1 pl-4 text-m'
+					inputClassName='bg-white border border-outline border-solid placeholder:text-second-txt transition delay-150 focus:outline-none focus:border-2 focus:border-primary mx-4 py-1 pl-4 text-m'
 					inputWidth='auto'
 					trailingIcon='Search'
-					trailingSpanClass='py-1 pr-6'
+					trailingSpanClass='py-1 pr-6 hover:text-primary'
 					button={true}
 					onSubmit={handleSearch}
 					onTrailingIconClick={handleSearch}

@@ -6,10 +6,10 @@ import {
 import { getOwnerId } from '../../authService';
 import { Snackbar } from '../UI/Snackbar';
 import { CocktailList } from '../components/CocktailList';
-import { Header } from '../UI/Header';
 import { SearchHeader } from '../UI/SearchHeader';
+import { LoadingIndicator } from '../UI/LoadingIndicator';
 
-export function YourCocktails() {
+export function YourCocktailsPage() {
 	const ownerId: string | undefined = getOwnerId();
 	const [query, setQuery] = useState<string>('');
 	const { data, isLoading, refetch } = useGetCocktailsQuery({ ownerId, query });
@@ -19,20 +19,27 @@ export function YourCocktails() {
 		refetch();
 	}
 
+	function editCocktail() {}
+
 	return (
 		<>
 			<SearchHeader onSearch={(query: string) => setQuery(query)} />
 			{isLoading ? (
-				<p>Loading...</p>
+				<LoadingIndicator />
 			) : (
 				<main>
 					{isSuccess && (
-						<Snackbar message='Cocktail has been removed.' iconName='done' />
+						<Snackbar
+							message='Cocktail has been removed.'
+							iconName='done'
+							className='t-[5%] translate-x-[145%]'
+						/>
 					)}
 					<CocktailList
 						cocktails={data}
-						deleteBtn={true}
+						btns={true}
 						deleteCocktail={deleteCocktail}
+						editCocktail={editCocktail}
 					/>
 				</main>
 			)}

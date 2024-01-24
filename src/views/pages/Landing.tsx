@@ -1,14 +1,20 @@
-import MainWelcome from '../components/Welcome';
+import Welcome from '../components/Welcome';
 import Login from '../components/Login';
+import logoImg from '../../images/logo.png';
 
 export default function LandingPage() {
 	return (
-		<div className='grid grid-cols-2 items-center'>
-			<div className='col-span-1'>
-				<MainWelcome />
+		<div className='flex flex-col h-full w-full md:flex-row'>
+			<div className='md:w-1/2 md:h-full hidden md:inline-block'>
+				<Welcome />
 			</div>
-			<div className='col-span-1 h-fit w-full'>
-				<Login />
+			<div className='md:w-1/2 h-[100vh] flex flex-col justify-center'>
+				<div>
+					<div className='items-center w-full flex flex-col'>
+						<img src={logoImg} alt='logo' className='w-1/2 h-fit pb-10' />
+					</div>
+					<Login />
+				</div>
 			</div>
 		</div>
 	);

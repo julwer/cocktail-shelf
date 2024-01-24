@@ -79,7 +79,7 @@ export function CocktailForm() {
 	const formClasses: string =
 		'p-4 placeholder:text-second-txt text-main-txt cursor-pointer border border-2 border-outline border-solid p-3 m-4 focus:outline-primary w-full rounded-full';
 	const buttonClasses: string =
-		'border-none p-3 m-5 w-32 font-bold hover:text-xl rounded-full';
+		'border-none p-3 m-5 w-32 font-bold transition delay-150 ease-in-out rounded-full hover:scale-105 ';
 	const labelClasses: string = 'text-main-txt font-bold text-xl self-start';
 	const iconStyle: object = { fontSize: '70px' };
 	return (
@@ -90,7 +90,7 @@ export function CocktailForm() {
 				onSubmit={handleSubmit}>
 				<label
 					htmlFor='fileInput'
-					className='flex flex-col items-center border-2  border-dashed rounded-md py-10 px-16 cursor-pointer border-outline  hover:border-secondary w-1/2 mb-4'>
+					className='flex flex-col items-center border-2  border-dashed rounded-md py-10 px-16 cursor-pointer border-outline w-1/2 mb-4 transition delay-100 hover:border-primary '>
 					<div className='w-32 h-32 overflow-hidden flex items-center justify-center rounded-md'>
 						{img.imgPreview !== '' ? (
 							<img
@@ -100,7 +100,7 @@ export function CocktailForm() {
 							/>
 						) : (
 							<span
-								className='material-symbols-outlined text-secondary'
+								className='material-symbols-outlined text-primary'
 								style={iconStyle}>
 								image
 							</span>

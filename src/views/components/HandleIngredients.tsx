@@ -35,7 +35,7 @@ export function HandleIngredients({
 				/>
 			))}
 			<Button
-				className='border-2 border-outline border-solid  p-4 mt-6 mb-4 w-fit text-main-txt cursor-pointer focus:border-secondary focus:border-solid hover:border-primary hover:border-solid font-semibold self-center rounded-full'
+				className='border-2 border-outline border-solid p-4 mt-6 mb-4 w-fit text-main-txt cursor-pointer font-semibold self-center rounded-full transition delay-120 focus:border-primary focus:border-solid hover:border-primary hover:border-solid '
 				onClick={addIngredientInput}>
 				+ Ingredient
 			</Button>

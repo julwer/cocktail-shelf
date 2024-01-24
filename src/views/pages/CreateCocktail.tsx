@@ -1,7 +1,7 @@
 import { CocktailForm } from '../components/CocktailForm';
 import { Header } from '../UI/Header';
 
-export function CreateCocktail() {
+export function CreateCocktailPage() {
 	return (
 		<div className='flex flex-col'>
 			<Header />

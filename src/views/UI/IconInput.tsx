@@ -18,6 +18,7 @@ type IconInputProps = {
 	onTrailingIconClick?: () => void;
 	onSubmit?: () => void;
 	autocomplete?: string;
+	required?: boolean; 
 };
 
 export default function IconInput({
@@ -38,6 +39,7 @@ export default function IconInput({
 	onSubmit,
 	autocomplete,
 	onChange,
+	required,
 }: IconInputProps) {
 	const inputClasses = 'rounded-full text-main-txt cursor-pointer ';
 	const onInputChangeEvent = (event: ChangeEvent<HTMLInputElement>) => {
@@ -65,6 +67,7 @@ export default function IconInput({
 					if (event.key === 'Enter' && onSubmit) onSubmit();
 				}}
 				onSubmit={onSubmit}
+				required={required}
 			/>
 			{trailingIcon && (
 				<span

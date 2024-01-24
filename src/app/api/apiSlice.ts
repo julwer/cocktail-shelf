@@ -38,7 +38,7 @@ export const api = createApi({
 				},
 				params: {
 					query,
-					ownerId,
+					userId: ownerId,
 				},
 			}),
 		}),
