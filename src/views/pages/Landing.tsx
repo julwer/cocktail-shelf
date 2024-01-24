@@ -11,7 +11,7 @@ export default function LandingPage() {
 			<div className='md:w-1/2 h-[100vh] flex flex-col justify-center'>
 				<div>
 					<div className='items-center w-full flex flex-col'>
-						<img src={logoImg} alt='logo' className='w-1/2 h-fit pb-10' />
+						<img src={logoImg} alt='logo' className='w-1/2 h-fit pb-6' />
 					</div>
 					<Login />
 				</div>

@@ -87,9 +87,9 @@ export function Signup() {
 		'outline outline-form focus:outline-primary focus:outline-3 w-full py-2 px-12 ';
 
 	return (
-		<section className='flex flex-col w-full h-[100vh] px-4 justify-center'>
+		<section className='flex flex-col w-full h-[100vh] justify-center'>
 			<div className='flex flex-col items-center w-full'>
-				<img src={logoImg} alt='logo' className='w-1/2 md:max-md:w-1/4 h-fit p-4' />
+				<img src={logoImg} alt='logo' className='w-1/2 md:w-1/4 pb-6' />
 			</div>
 			<MainText
 				h1Txt='Welcome!'
@@ -97,7 +97,7 @@ export function Signup() {
 				h2ClassName='mb-4'
 			/>
 			<form
-				className='flex flex-col self-center items-center md:max-lg:w-1/2'
+				className='flex flex-col self-center items-center md:w-1/2 w-full'
 				name='loginForm'>
 				<IconInput
 					placeholder='Email'
@@ -128,8 +128,10 @@ export function Signup() {
 					<p className='text-l font-bold'>Your password must contain:</p>
 					<div className='flex m-2'>
 						<span
-							className={`material-symbols-outlined text-second-txt font-bold rounded-full text-sm w-5 h-5 flex items-center justify-center ${
-								passwordValidation() ? 'bg-primary' : 'bg-form'
+							className={`material-symbols-outlined font-bold rounded-full text-sm w-5 h-5 flex items-center justify-center ${
+								passwordValidation()
+									? 'bg-primary text-white'
+									: 'bg-form text-second-txt'
 							}`}>
 							check
 						</span>

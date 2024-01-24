@@ -23,16 +23,16 @@ export function YourCocktailsPage() {
 
 	return (
 		<>
-			<SearchHeader onSearch={(query: string) => setQuery(query)} />
+			{/* <SearchHeader onSearch={(query: string) => setQuery(query)} /> */}
 			{isLoading ? (
 				<LoadingIndicator />
 			) : (
-				<main>
+				<main className='flex justify-center'>
 					{isSuccess && (
 						<Snackbar
 							message='Cocktail has been removed.'
 							iconName='done'
-							className='t-[5%] translate-x-[145%]'
+							className='top-[5%]'
 						/>
 					)}
 					<CocktailList

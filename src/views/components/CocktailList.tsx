@@ -32,7 +32,7 @@ export function CocktailList({
 						</div>
 					</main>
 				))}
-			<ul className='list-none p0 flex flex-wrap w-2/3 mx-auto justify-center'>
+			<ul className='list-none flex flex-col md:flex-row md:flex-wrap md:justify-center md:w-2/3'>
 				{cocktails &&
 					cocktails.length > 0 &&
 					cocktails!.map((cocktail: any) => {

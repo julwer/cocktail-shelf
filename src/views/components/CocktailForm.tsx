@@ -90,7 +90,7 @@ export function CocktailForm() {
 				onSubmit={handleSubmit}>
 				<label
 					htmlFor='fileInput'
-					className='flex flex-col items-center border-2  border-dashed rounded-md py-10 px-16 cursor-pointer border-outline w-1/2 mb-4 transition delay-100 hover:border-primary '>
+					className='flex flex-col items-center border-2  border-dashed rounded-md py-10 px-16 cursor-pointer border-outline md:w-1/2 mb-4 transition delay-100 hover:border-primary '>
 					<div className='w-32 h-32 overflow-hidden flex items-center justify-center rounded-md'>
 						{img.imgPreview !== '' ? (
 							<img
