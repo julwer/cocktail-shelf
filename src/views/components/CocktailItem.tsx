@@ -24,7 +24,7 @@ export function CocktailItem({
 
 	return (
 		<section className='my-1 flex flex-col items-center'>
-			<div className='h-48 w-48 my-1 md:my-2 md:mx-4'>
+			<div className='h-64 w-64 md:h-48 md:w-48 my-1 md:my-2 md:mx-4'>
 				<div className='h-full w-full rounded-lg overflow-hidden box-content'>
 					<img
 						src={`${imageUrl}`}
@@ -33,7 +33,7 @@ export function CocktailItem({
 					/>
 				</div>
 				{btns && (
-					<div className='box-content relative flex flex-row justify-end bottom-[184px] right-2'>
+					<div className='box-content relative flex flex-row justify-end bottom-[95%] right-2'>
 						<Button
 							onClick={removeCocktail}
 							className='bg-form/50 w-7 h-7 rounded-md flex items-center justify-center hover:text-primary text-main-txt mr-1'>
@@ -48,7 +48,7 @@ export function CocktailItem({
 				)}
 			</div>
 			<Link to={`/home/${id}`} className='self-center md:self-start'>
-				<p className='font-bold w-fit text-main-txt text-sm ml-2 md:ml-6 md:text-m md:text-nowrap hover:underline '>
+				<p className='font-bold w-fit text-main-txt text-m ml-2 text-nowrap hover:underline md:ml-6 '>
 					{name}
 				</p>
 			</Link>

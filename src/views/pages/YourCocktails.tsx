@@ -8,6 +8,7 @@ import { Snackbar } from '../UI/Snackbar';
 import { CocktailList } from '../components/CocktailList';
 import { SearchHeader } from '../UI/SearchHeader';
 import { LoadingIndicator } from '../UI/LoadingIndicator';
+import { MobileMenu } from '../UI/MobileMenu';
 
 export function YourCocktailsPage() {
 	const ownerId: string | undefined = getOwnerId();
@@ -24,6 +25,7 @@ export function YourCocktailsPage() {
 	return (
 		<>
 			{/* <SearchHeader onSearch={(query: string) => setQuery(query)} /> */}
+			<MobileMenu searchInput={true}></MobileMenu>
 			{isLoading ? (
 				<LoadingIndicator />
 			) : (

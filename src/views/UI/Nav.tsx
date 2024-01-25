@@ -29,7 +29,7 @@ export function Nav({ children }: NavProps) {
 					Create cocktail
 				</Link>
 				<Link to={'/home/yourCocktails'} className={linkClasses}>
-					Your coktails
+					Your cocktails
 				</Link>
 				<Link to={'/home/profile'} className={linkClasses}>
 					Profile
