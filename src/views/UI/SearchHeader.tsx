@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { Nav } from './Nav';
 
 type SearchHeaderProps = {
-	onSearch: (query: string) => void;
+	onSearch: (query: string ) => void;
 };
 
 export function SearchHeader({ onSearch }: SearchHeaderProps) {

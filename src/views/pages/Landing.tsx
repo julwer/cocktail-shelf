@@ -4,17 +4,19 @@ import logoImg from '../../images/logo.png';
 
 export default function LandingPage() {
 	return (
-		<div className='flex flex-col h-full w-full md:flex-row'>
+		<div className='flex flex-col h-screen w-screen md:flex-row'>
 			<div className='md:w-1/2 md:h-full hidden md:inline-block'>
 				<Welcome />
 			</div>
-			<div className='md:w-1/2 h-[100vh] flex flex-col justify-center'>
-				<div>
-					<div className='items-center w-full flex flex-col'>
-						<img src={logoImg} alt='logo' className='w-1/2 h-fit pb-6' />
+			<div className='absolute md:mt-8 flex flex-col w-full mt-20'>
+				<div className='w-full md:w-1/2 md:self-end flex justify-center'>
+					<div className='md:w-1/2 h-fit w-2/3 '>
+						<img src={logoImg} alt='logo' className='w-full' />
 					</div>
-					<Login />
 				</div>
+			</div>
+			<div className='h-screen flex flex-col items-center justify-center  md:w-1/2'>
+				<Login />
 			</div>
 		</div>
 	);

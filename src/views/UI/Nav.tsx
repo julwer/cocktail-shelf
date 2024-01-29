@@ -25,14 +25,11 @@ export function Nav({ children }: NavProps) {
 			{children}
 			<div className='w-full' />
 			<nav className='flex flex-row gap-6'>
-				<Link to={'/home/createCocktail'} className={linkClasses}>
+				<Link to={'/createCocktail'} className={linkClasses}>
 					Create cocktail
 				</Link>
-				<Link to={'/home/yourCocktails'} className={linkClasses}>
+				<Link to={'/yourCocktails'} className={linkClasses}>
 					Your cocktails
-				</Link>
-				<Link to={'/home/profile'} className={linkClasses}>
-					Profile
 				</Link>
 				<Link to={'/'} className={linkClasses} onClick={handleLogout}>
 					Log out

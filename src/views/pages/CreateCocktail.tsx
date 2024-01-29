@@ -1,12 +1,20 @@
+import { useDispatch, useSelector } from 'react-redux';
+import { isMobile } from '../../utils';
 import { CocktailForm } from '../components/CocktailForm';
 import { Header } from '../UI/Header';
-import { MobileMenu } from '../UI/MobileMenu';
+import { MobileHeader } from '../UI/MobileHeader';
+import { useScreenWidth } from '../../hooks/useScreenWidth';
 
 export function CreateCocktailPage() {
+	const windowWidth: number = useScreenWidth();
+
 	return (
 		<div className='flex flex-col'>
-			<MobileMenu searchInput={false}/>
-			{/* <Header /> */}
+			{isMobile(windowWidth) ? (
+				<MobileHeader searchInput={false} />
+			) : (
+				<Header />
+			)}
 			<div className='flex self-center md:w-1/2 justify-center m-4'>
 				<CocktailForm />
 			</div>

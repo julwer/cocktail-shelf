@@ -68,12 +68,8 @@ export function CocktailForm() {
 	}, [data, navigate]);
 
 	function resetInputs() {
-		setName('');
-		setDescription('');
 		setInputArray([]);
-		setInstructions('');
 		setImg({ ...img, imgFile: null as File | null, imgPreview: '' });
-		//robi się pusty obiekt ale nie robi się puste pola w formie (nie usuwa się wcześniej wpisany kod; tylko w przypadku img input oraz ingredients); najlepiej żeby po tym odświeżył się komponent
 	}
 
 	const formClasses: string =
@@ -84,29 +80,29 @@ export function CocktailForm() {
 	const iconStyle: object = { fontSize: '70px' };
 	return (
 		<>
+			{/* jeżeli jest jakiś empty input to wiadomość że every field must be filled out! ==> disabled button dopóki inputy nie przejdą walidacji*/}
 			<form
 				className='flex flex-col items-center w-full m-4'
 				name='cocktailForm'
 				onSubmit={handleSubmit}>
 				<label
 					htmlFor='fileInput'
-					className='flex flex-col items-center border-2  border-dashed rounded-md py-10 px-16 cursor-pointer border-outline md:w-1/2 mb-4 transition delay-100 hover:border-primary '>
-					<div className='w-32 h-32 overflow-hidden flex items-center justify-center rounded-md'>
+					className='flex flex-col items-center border-2 w-full py-5 border-dashed rounded-md cursor-pointer border-outline mb-4 transition delay-100 hover:border-primary md:w-1/2'>
+					<div className='w-32 h-32 md:h-32 overflow-hidden flex items-center justify-center rounded-md'>
 						{img.imgPreview !== '' ? (
 							<img
 								src={img.imgPreview}
 								alt='Selected Image'
-								className='w-full h-full object-cover'
+								className='object-cover h-full w-full'
 							/>
 						) : (
 							<span
-								className='material-symbols-outlined text-primary'
+								className='material-symbols-outlined text-primary flex items-center justify-center'
 								style={iconStyle}>
 								image
 							</span>
 						)}
 					</div>
-
 					<p className='text-main-txt font-bold mt-4 text-center text-l text-nowrap'>
 						{img.imgPreview !== ''
 							? 'Your photo has been added!'
@@ -122,7 +118,6 @@ export function CocktailForm() {
 						accept='image/png, image/jpeg'
 					/>
 				</label>
-
 				<Input
 					placeholder='Name'
 					className={formClasses}
@@ -165,7 +160,7 @@ export function CocktailForm() {
 						Save
 					</Button>
 					<Button
-						type='button'
+						type='reset'
 						onClick={resetInputs}
 						className={`bg-form text-main-txt ${buttonClasses}`}>
 						Reset

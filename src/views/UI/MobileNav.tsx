@@ -16,7 +16,7 @@ export function MobileNav({ handleToggle, searchInput }: MobileNavProps) {
 		dispatch(logout());
 	}
 
-	const linkClasses: string = 'py-2 px-4 text-main-txt text-xl';
+	const linkClasses: string = 'py-2 px-4 text-main-txt text-xl z-10';
 
 	return (
 		<nav
@@ -24,19 +24,16 @@ export function MobileNav({ handleToggle, searchInput }: MobileNavProps) {
 				!searchInput && 'top-16'
 			}`}>
 			<Link
-				to={'/home/createCocktail'}
+				to={'/createCocktail'}
 				onClick={handleToggle}
 				className={linkClasses}>
 				Create cocktail
 			</Link>
 			<Link
-				to={'/home/yourCocktails'}
+				to={'/yourCocktails'}
 				onClick={handleToggle}
 				className={linkClasses}>
 				Your cocktails
-			</Link>
-			<Link to={'/home/profile'} onClick={handleToggle} className={linkClasses}>
-				Profile
 			</Link>
 			<Link to={'/'} onClick={handleLogout} className={linkClasses}>
 				Log out
