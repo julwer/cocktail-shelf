@@ -55,7 +55,6 @@ export function YourCocktailsPage() {
 					editCocktail={editCocktail}
 				/>
 			</main>
-			)
 		</>
 	);
 }

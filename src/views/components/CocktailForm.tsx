@@ -80,15 +80,15 @@ export function CocktailForm() {
 	const iconStyle: object = { fontSize: '70px' };
 	return (
 		<>
-			{/* jeżeli jest jakiś empty input to wiadomość że every field must be filled out! ==> disabled button dopóki inputy nie przejdą walidacji*/}
+			{/* walidacja after submition, dodać info że pole cant be empty + podświetlić input, jeżeli jest wymagane przez backend -> nie ma submit jeżeli pola nie są ok*/}
 			<form
 				className='flex flex-col items-center w-full m-4'
 				name='cocktailForm'
 				onSubmit={handleSubmit}>
 				<label
 					htmlFor='fileInput'
-					className='flex flex-col items-center border-2 w-full py-5 border-dashed rounded-md cursor-pointer border-outline mb-4 transition delay-100 hover:border-primary md:w-1/2'>
-					<div className='w-32 h-32 md:h-32 overflow-hidden flex items-center justify-center rounded-md'>
+					className='flex flex-col items-center border-2 w-full py-5 border-dashed rounded-md cursor-pointer border-outline mb-4 transition delay-100 hover:border-primary'>
+					<div className='w-32 h-32 overflow-hidden flex items-center justify-center rounded-md'>
 						{img.imgPreview !== '' ? (
 							<img
 								src={img.imgPreview}
@@ -103,7 +103,7 @@ export function CocktailForm() {
 							</span>
 						)}
 					</div>
-					<p className='text-main-txt font-bold mt-4 text-center text-l text-nowrap'>
+					<p className='text-main-txt font-bold mt-4 text-center text-l text-wrap'>
 						{img.imgPreview !== ''
 							? 'Your photo has been added!'
 							: 'Add Cover Photo'}

@@ -89,7 +89,7 @@ export default function Login() {
 					<Snackbar
 						message='Invalid email or password, try again!'
 						iconName='error'
-						className='left-[50%] -translate-x-[50%] top-32 bg-red/70 w-[80%] md:left-[85%] md:-translate-x-[85%]'
+						className='left-[50%] -translate-x-[50%] top-32 bg-red/90 w-[80%] md:left-[85%] md:-translate-x-[85%]'
 						duration={4000}
 					/>
 				)}

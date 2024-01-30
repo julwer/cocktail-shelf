@@ -23,6 +23,9 @@ export function MobileNav({ handleToggle, searchInput }: MobileNavProps) {
 			className={`absolute flex flex-col ml-2 bg-white rounded-md ${
 				!searchInput && 'top-16'
 			}`}>
+			<Link to={'/home'} onClick={handleToggle} className={linkClasses}>
+				Home
+			</Link>
 			<Link
 				to={'/createCocktail'}
 				onClick={handleToggle}

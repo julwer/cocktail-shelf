@@ -8,7 +8,7 @@ export default function LandingPage() {
 			<div className='md:w-1/2 md:h-full hidden md:inline-block'>
 				<Welcome />
 			</div>
-			<div className='absolute md:mt-8 flex flex-col w-full mt-20'>
+			<div className='absolute mt-20 flex flex-col w-full'>
 				<div className='w-full md:w-1/2 md:self-end flex justify-center'>
 					<div className='md:w-1/2 h-fit w-2/3 '>
 						<img src={logoImg} alt='logo' className='w-full' />

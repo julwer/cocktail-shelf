@@ -10,16 +10,23 @@ import {
 	setCredentials,
 } from '../../app/state/auth/authSlice';
 import { LoginRequest as SignupDataType } from '../../types/apiDataTypes';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { setTokens } from '../../authService';
 import logoImg from '../../images/logo.png';
 import { Snackbar } from '../UI/Snackbar';
+import { FieldError } from '../../types/fieldError';
 
 export function Signup() {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const [register, { isLoading, isSuccess, isError }] = useRegisterMutation();
 	const [login, { data }] = useLoginMutation();
+	const [subEmailIsValid, setSubEmailIsValid] = useState<FieldError>(
+		FieldError.empty
+	);
+	const [subPasswordIsValid, setSubPasswordIsValid] = useState<FieldError>(
+		FieldError.empty
+	);
 
 	const emailInputValue = useSelector((state: any) => state.auth.user.email);
 	const passwordInputValue = useSelector(
@@ -29,12 +36,17 @@ export function Signup() {
 		(state: any) => state.auth.isAuthenticated
 	);
 	const credentials = useSelector((state: any) => state.auth.credentials);
-	const emailRegExp: RegExp = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 
 	const signupData = {
 		email: emailInputValue,
 		password: passwordInputValue,
 	} as SignupDataType;
+
+	const emailRegExp: RegExp = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+	const emailIsInvalid: boolean = !emailRegExp.test(emailInputValue);
+	const passwordIsInvalid: boolean = passwordInputValue.length < 8;
+
+	// potrzebujemy tych zmiennych bo śledzimy state inputów aby w zależności od niego pokazać icon color i txt color
 
 	const handleEmailChange = (email: string) => {
 		dispatch(emailChanged(email));
@@ -44,23 +56,10 @@ export function Signup() {
 		dispatch(passwordChanged(password));
 	};
 
-	function passwordIsValid(): boolean {
-		if (passwordInputValue.length > 7) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	const emailIsValid = emailRegExp.test(emailInputValue);
-
-	const signInDataAreValid = passwordIsValid() && emailIsValid;
-
 	async function signupHandler(event: React.SyntheticEvent) {
 		event.preventDefault();
-		if (signInDataAreValid) {
-			await register(signupData);
-		}
+
+		return await register(signupData);
 	}
 
 	useEffect(() => {
@@ -101,11 +100,11 @@ export function Signup() {
 				<Snackbar
 					message='Invalid email or password, try again!'
 					iconName='error'
-					className='left-[50%] -translate-x-[50%] top-24 md:left-[85%] md:-translate-x-[85%] md:top-32 bg-red/70 w-[80%]'
+					className='left-[50%] -translate-x-[50%] top-24 bg-red/90 w-[80%] md:w-[35%]'
 					duration={4000}
 				/>
 			)}
-			<div className='absolute md:mt-8 flex flex-col items-center w-full mt-20'>
+			<div className='absolute md:mt-8 md:top-10 flex flex-col items-center w-full mt-20'>
 				<div className='w-2/3 md:w-1/4 h-fit'>
 					<img src={logoImg} alt='logo' className='w-full md:w-full pb-6' />
 				</div>
@@ -123,7 +122,7 @@ export function Signup() {
 					<IconInput
 						placeholder='Email'
 						leadingIcon='mail'
-						inputClassName={inputClasses}
+						inputClassName={`${inputClasses}`}
 						leadingSpanClass='top-2 pl-4'
 						name='email'
 						onChange={handleEmailChange}
@@ -146,19 +145,33 @@ export function Signup() {
 						required={true}
 					/>
 					<div className='text-main-txt'>
-						<p className='text-l font-bold inline'>
-							Your password must contain:
-						</p>
 						<div className='flex flex-row'>
 							<span
 								className={`material-symbols-outlined font-bold rounded-full text-sm w-5 h-5 flex items-center justify-center mb-4 ${
-									passwordIsValid()
+									!emailIsInvalid
 										? 'bg-primary text-white'
 										: 'bg-form text-second-txt'
 								}`}>
 								check
 							</span>
-							<p className='ml-2 inline'>At least 8 characters.</p>
+							<p className={`ml-2 inline text-main-txt`}>
+								You have correct email
+							</p>
+						</div>
+					</div>
+					<div className='text-main-txt'>
+						<div className='flex flex-row'>
+							<span
+								className={`material-symbols-outlined font-bold rounded-full text-sm w-5 h-5 flex items-center justify-center mb-4 ${
+									!passwordIsInvalid
+										? 'bg-primary text-white'
+										: 'bg-form text-second-txt'
+								}`}>
+								check
+							</span>
+							<p className={`ml-2 inlinetext-main-txt}`}>
+								Your password contains at least 8 characters
+							</p>
 						</div>
 					</div>
 					<Button

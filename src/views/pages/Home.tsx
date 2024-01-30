@@ -21,7 +21,7 @@ export function HomePage() {
 			{isLoading && <LoadingIndicator />}
 			<div>
 				{isMobile(windowWidth) ? (
-					<MobileHeader searchInput={true} />
+					<MobileHeader searchInput={true} onSearch={onSearch} />
 				) : (
 					<SearchHeader onSearch={onSearch} />
 				)}

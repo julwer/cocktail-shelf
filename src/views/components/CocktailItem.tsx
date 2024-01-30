@@ -31,13 +31,15 @@ export function CocktailItem({
 	return (
 		<section className='my-1 flex flex-col items-center'>
 			<div className='h-64 w-64 md:h-48 md:w-48 my-1 md:my-2 md:mx-4'>
-				<div className='h-full w-full rounded-lg overflow-hidden box-content'>
-					<img
-						src={`${imageUrl}`}
-						alt={name}
-						className='w-full h-full object-cover'
-					/>
-				</div>
+				<Link to={`/${id}`} className='self-center md:self-start'>
+					<div className='h-full w-full rounded-lg overflow-hidden box-content'>
+						<img
+							src={`${imageUrl}`}
+							alt={name}
+							className='w-full h-full object-cover'
+						/>
+					</div>
+				</Link>
 				{btns && (
 					<div className='box-content relative flex flex-row justify-end bottom-[95%] right-2'>
 						<Button

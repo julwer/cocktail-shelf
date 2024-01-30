@@ -15,7 +15,7 @@ export function EditCocktailPage() {
 				<Header />
 			)}
 			<p className='m-4 text-center font-bold text-main-txt md:text-3xl md:m-6'>
-				Edit page in progress...
+				Edit page is being developed...
 			</p>
 			<div className='flex flex-col items-center'>
 				<div className='m-4 rounded-md overflow-hidden w-fit h-fit'>
