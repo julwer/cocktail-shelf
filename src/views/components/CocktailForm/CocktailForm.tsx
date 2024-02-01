@@ -13,6 +13,7 @@ type imgState = { imgFile?: File | null; imgPreview: string };
 export function CocktailForm() {
 	const navigate = useNavigate();
 	const [createCocktail, { isSuccess, data }] = useCreateCocktailMutation();
+
 	const [img, setImg] = useState<imgState>({
 		imgFile: null as File | null,
 		imgPreview: '',
@@ -21,7 +22,6 @@ export function CocktailForm() {
 	const [description, setDescription] = useState<string>('');
 	const [inputArray, setInputArray] = useState<string[]>([]);
 	const [instructions, setInstructions] = useState<string>('');
-
 	const [emptyNameError, setEmptyNameError] = useState<boolean>(false);
 	const [emptyDescriptionError, setEmptyDescriptionError] =
 		useState<boolean>(false);
@@ -60,8 +60,6 @@ export function CocktailForm() {
 			description.length !== 0 &&
 			description !== '' &&
 			inputArray.length !== 0 &&
-			// inputArray[0].length !== 0 &&
-			// inputArray[0] !== '' &&
 			instructions.length !== 0 &&
 			instructions !== ''
 		) {
@@ -76,11 +74,6 @@ export function CocktailForm() {
 		if (inputArray.length === 0) {
 			setEmptyIngredientArrayError(true);
 		}
-		// if(inputArray.length !== 0){
-		// 	if(inputArray[0].length === 0 || inputArray[0] === ''){
-		// 		setEmptyIngredientArrayError(true)
-		// 	}
-		// }
 		if (instructions.length === 0 && instructions === '') {
 			setEmptyInstructionsError(true);
 		}
@@ -96,8 +89,8 @@ export function CocktailForm() {
 	}
 
 	useEffect(() => {
-		if (isSuccess) {
-			navigate(`../${data!.id}`);
+		if (isSuccess && data) {
+			navigate(`../${data.id}`);
 		}
 	}, [data, navigate, isSuccess]);
 

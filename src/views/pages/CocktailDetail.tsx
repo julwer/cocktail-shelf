@@ -18,8 +18,6 @@ export function CocktailDetailPage() {
 	const { data, isLoading } = useGetCocktailDetailsQuery(cocktailId!);
 	const windowWidth: number = useScreenWidth();
 
-	console.log(data?.imageUrl);
-
 	return (
 		<>
 			{isLoading && <LoadingIndicator />}

@@ -1,5 +1,5 @@
 import { CocktailModel } from '../../../types/cocktailModel';
-import { CocktailItem } from './CocktailItem';
+import { CocktailItem, CocktailItemProps } from './CocktailItem';
 import { NoCocktailsError } from './NoCocktailsError';
 
 export type CocktailListProps = {
@@ -15,6 +15,7 @@ export function CocktailList({
 	editCocktail,
 	deleteCocktail,
 }: CocktailListProps) {
+
 	return (
 		<>
 			{!cocktails ||

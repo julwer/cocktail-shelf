@@ -97,7 +97,6 @@ function createCocktailRequestToFormData(
 ): FormData {
 	const formData = new FormData();
 	formData.append('image', newCocktail.img);
-	//znależć typ danych dawanych do inputa img
 	formData.append('name', newCocktail.name);
 	formData.append('description', newCocktail.description);
 	formData.append('instructions', newCocktail.instructions);

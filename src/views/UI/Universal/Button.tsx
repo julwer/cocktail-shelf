@@ -2,9 +2,9 @@ type ButtonProps = {
 	props?: any;
 	className?: string;
 	children?: any;
-	type?: any;
-	onClick?: any;
-	disabled?: any;
+	type?: 'submit' | 'reset' | 'button' | undefined;
+	onClick?: () => void;
+	disabled?: boolean | undefined;
 };
 
 export default function Button({
