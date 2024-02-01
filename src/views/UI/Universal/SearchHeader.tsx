@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { Nav } from './Nav';
 
 type SearchHeaderProps = {
-	onSearch: (query: string ) => void;
+	onSearch: (query: string) => void;
 };
 
 export function SearchHeader({ onSearch }: SearchHeaderProps) {
@@ -23,7 +23,7 @@ export function SearchHeader({ onSearch }: SearchHeaderProps) {
 
 	useEffect(() => {
 		onSearch(debouncedValue);
-	}, [debouncedValue]);
+	}, [debouncedValue, onSearch]);
 
 	return (
 		<header className='flex flex-row items-center py-3 px-4 min-h-14'>

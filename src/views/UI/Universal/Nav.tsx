@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
-import logoPng from '../../images/logo.png';
-import { clearTokens } from '../../authService';
+import logoPng from '../../../images/logo.png';
+import { clearTokens } from '../../../utils/authService';
 import { useDispatch } from 'react-redux';
-import { logout } from '../../app/state/auth/authSlice';
+import { logout } from '../../../app/state/auth/authSlice';
 
 type NavProps = { children?: any };
 
@@ -19,7 +19,11 @@ export function Nav({ children }: NavProps) {
 		<>
 			<Link to='/home'>
 				<div className='h-fit w-52'>
-					<img src={logoPng} className='w-full h-full' />
+					<img
+						src={logoPng}
+						className='w-full h-full'
+						alt='cocktail shelf logo'
+					/>
 				</div>
 			</Link>
 			{children}

@@ -1,7 +1,6 @@
-import { CocktailModel } from '../../types/cocktailModel';
-import MainText from '../UI/MainText';
+import { CocktailModel } from '../../../types/cocktailModel';
 import { CocktailItem } from './CocktailItem';
-import catImg from '../../images/hiddencat.jpg';
+import { NoCocktailsError } from './NoCocktailsError';
 
 export type CocktailListProps = {
 	cocktails: CocktailModel[] | undefined;
@@ -20,17 +19,7 @@ export function CocktailList({
 		<>
 			{!cocktails ||
 				(cocktails.length === 0 ? (
-					<main className='flex flex-col items-center m-4'>
-						<MainText
-							h1Txt='We could not find any cocktails'
-							h2Txt='Try to create a new one!'
-							h2ClassName='text-main-txt mt-2'
-							className='md:absolute md:m-8 mb-4  md:w-1/2'
-						/>
-						<div className='md:w-1/2 overflow-hidden rounded-xl justify-self-center'>
-							<img alt='hidden cat' src={catImg} className='object-cover' />
-						</div>
-					</main>
+					<NoCocktailsError />
 				) : (
 					<ul className='list-none flex flex-col md:flex-row md:flex-wrap md:justify-center md:w-2/3'>
 						{cocktails &&

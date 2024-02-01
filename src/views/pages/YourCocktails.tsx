@@ -3,13 +3,13 @@ import {
 	useDeleteCocktailMutation,
 	useGetCocktailsQuery,
 } from '../../app/api/apiSlice';
-import { getOwnerId } from '../../authService';
-import { Snackbar } from '../UI/Snackbar';
-import { CocktailList } from '../components/CocktailList';
-import { SearchHeader } from '../UI/SearchHeader';
-import { LoadingIndicator } from '../UI/LoadingIndicator';
-import { MobileHeader } from '../UI/MobileHeader';
-import { isMobile } from '../../utils';
+import { getOwnerId } from '../../utils/authService';
+import { Snackbar } from '../UI/Universal/Snackbar';
+import { CocktailList } from '../components/DisplayCocktail/CocktailList';
+import { SearchHeader } from '../UI/Universal/SearchHeader';
+import { LoadingIndicator } from '../UI/Universal/LoadingIndicator';
+import { MobileHeader } from '../UI/Mobile/MobileHeader';
+import { isMobile } from '../../utils/checkWindowWidth';
 import { useScreenWidth } from '../../hooks/useScreenWidth';
 
 export function YourCocktailsPage() {
@@ -24,7 +24,7 @@ export function YourCocktailsPage() {
 		if (isSuccess) {
 			refetch();
 		}
-	}, [isSuccess]);
+	}, [isSuccess, refetch]);
 
 	function onSearch(query: string) {
 		setQuery(query);

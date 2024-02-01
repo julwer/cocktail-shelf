@@ -1,5 +1,5 @@
 import { Cookies } from 'typescript-cookie';
-import { LoginResponse } from './types/apiDataTypes';
+import { LoginResponse } from '../types/apiDataTypes';
 import { jwtDecode } from 'jwt-decode';
 
 export const setTokens = (credentials: LoginResponse) => {

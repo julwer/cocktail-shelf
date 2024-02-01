@@ -1,8 +1,7 @@
-import { LoadingIndicator } from '../UI/LoadingIndicator';
-import { MobileHeader } from '../UI/MobileHeader';
+import { MobileHeader } from '../UI/Mobile/MobileHeader';
 import inProgressImg from '../../images/inprogress.gif';
-import { isMobile } from '../../utils';
-import { Header } from '../UI/Header';
+import { isMobile } from '../../utils/checkWindowWidth';
+import { Header } from '../UI/Universal/Header';
 import { useScreenWidth } from '../../hooks/useScreenWidth';
 
 export function EditCocktailPage() {

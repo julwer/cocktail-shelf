@@ -1,5 +1,5 @@
-import cocktailsImg from '../../images/39.jpg';
-import MainText from '../UI/MainText';
+import cocktailsImg from '../../../images/39.jpg';
+import MainText from '../../UI/Universal/MainText';
 
 export default function Welcome() {
 	return (

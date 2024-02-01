@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { useGetCocktailsQuery } from '../../app/api/apiSlice';
-import { SearchHeader } from '../UI/SearchHeader';
-import { CocktailList } from '../components/CocktailList';
-import { LoadingIndicator } from '../UI/LoadingIndicator';
-import { MobileHeader } from '../UI/MobileHeader';
-import { isMobile } from '../../utils';
+import { SearchHeader } from '../UI/Universal/SearchHeader';
+import { CocktailList } from '../components/DisplayCocktail/CocktailList';
+import { LoadingIndicator } from '../UI/Universal/LoadingIndicator';
+import { MobileHeader } from '../UI/Mobile/MobileHeader';
+import { isMobile } from '../../utils/checkWindowWidth';
 import { useScreenWidth } from '../../hooks/useScreenWidth';
 
 export function HomePage() {

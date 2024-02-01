@@ -5,7 +5,7 @@ import {
 	LoginResponse,
 } from '../../types/apiDataTypes';
 import { CocktailModel } from '../../types/cocktailModel';
-import { getAccessToken } from '../../authService';
+import { getAccessToken } from '../../utils/authService';
 
 export const api = createApi({
 	reducerPath: 'api',

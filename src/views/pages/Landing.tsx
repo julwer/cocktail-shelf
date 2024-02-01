@@ -1,5 +1,5 @@
-import Welcome from '../components/Welcome';
-import Login from '../components/Login';
+import Welcome from '../components/Landing/Welcome';
+import Login from '../components/Landing/Login/Login';
 import logoImg from '../../images/logo.png';
 
 export default function LandingPage() {

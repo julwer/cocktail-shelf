@@ -1,11 +1,13 @@
-import Button from '../UI/Button';
-import IconInput from '../UI/IconInput';
+import Button from '../../UI/Universal/Button';
+import IconInput from '../../UI/Universal/IconInput';
+import { InputErrorInfo } from './InputErrorInfo';
 
 type HandleIndegrientsProps = {
 	inputArray: string[];
 	addIngredientInput: () => void;
 	removeIngredientInput: (index: number) => void;
 	setIngredientInput: (index: number, text: string) => void;
+	emptyIngredientArrayError: boolean;
 };
 
 export function HandleIngredients({
@@ -13,18 +15,26 @@ export function HandleIngredients({
 	addIngredientInput,
 	removeIngredientInput,
 	setIngredientInput,
+	emptyIngredientArrayError,
 }: HandleIndegrientsProps) {
 	const formClasses: string =
 		'p-4 placeholder:text-second-txt text-main-txt cursor-pointer border border-2 border-outline border-solid p-3 mt-4 focus:outline-primary w-full rounded-full';
 
+	console.log(inputArray);
+
 	return (
 		<div className='flex flex-col w-full'>
 			<p className='text-main-txt text-xl font-bold'>Ingredients</p>
+			{emptyIngredientArrayError && (
+				<InputErrorInfo className='w-full flex justify-center' />
+			)}
 			{inputArray.map((ingredient: string, index: number) => (
 				<IconInput
 					key={index}
 					placeholder='Enter Ingredient'
-					inputClassName={formClasses}
+					inputClassName={`${formClasses} ${
+						emptyIngredientArrayError && 'border-red focus:outline-red'
+					}`}
 					autocomplete='off'
 					name='ingredient'
 					trailingIcon='delete_outline'
@@ -35,7 +45,9 @@ export function HandleIngredients({
 				/>
 			))}
 			<Button
-				className='border-2 border-outline border-solid p-4 mt-6 mb-4 w-fit text-main-txt cursor-pointer font-semibold self-center rounded-full transition delay-120 focus:border-primary focus:border-solid hover:border-primary hover:border-solid '
+				className={`border-2 border-outline border-solid p-3 w-32 mt-6 mb-4 text-main-txt cursor-pointer font-semibold self-center rounded-full transition delay-120 focus:border-primary focus:border-solid hover:border-primary hover:border-solid ease-in-out hover:scale-105 ${
+					emptyIngredientArrayError && 'border-red focus:border-red'
+				}`}
 				onClick={addIngredientInput}>
 				+ Ingredient
 			</Button>

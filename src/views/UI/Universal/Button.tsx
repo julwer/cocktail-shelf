@@ -14,7 +14,6 @@ export default function Button({
 	type = 'button',
 	disabled,
 }: ButtonProps) {
-	let classes = 'rounded-full cursor-pointer ' + className;
 	return (
 		<>
 			<button

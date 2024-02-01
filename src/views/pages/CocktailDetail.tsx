@@ -1,9 +1,9 @@
 import { useParams } from 'react-router-dom';
 import { useGetCocktailDetailsQuery } from '../../app/api/apiSlice';
-import { Header } from '../UI/Header';
-import { LoadingIndicator } from '../UI/LoadingIndicator';
-import { MobileHeader } from '../UI/MobileHeader';
-import { isMobile } from '../../utils';
+import { Header } from '../UI/Universal/Header';
+import { LoadingIndicator } from '../UI/Universal/LoadingIndicator';
+import { MobileHeader } from '../UI/Mobile/MobileHeader';
+import { isMobile } from '../../utils/checkWindowWidth';
 import {
 	ReactElement,
 	JSXElementConstructor,
@@ -11,11 +11,14 @@ import {
 	ReactPortal,
 } from 'react';
 import { useScreenWidth } from '../../hooks/useScreenWidth';
+import defaultCocktailImg from '../../images/defaultCocktail.png';
 
 export function CocktailDetailPage() {
 	const { cocktailId } = useParams<{ cocktailId?: string }>();
 	const { data, isLoading } = useGetCocktailDetailsQuery(cocktailId!);
 	const windowWidth: number = useScreenWidth();
+
+	console.log(data?.imageUrl);
 
 	return (
 		<>
@@ -30,8 +33,12 @@ export function CocktailDetailPage() {
 					<section className='w-full flex justify-center lg:hidden my-2'>
 						<div className='overflow-hidden h-[250px] w-[250px] md:w-[350px] md:h-[350px] rounded-xl lg:self-center '>
 							<img
-								src={data.imageUrl}
-								className='w-full h-full object-cover'></img>
+								src={`${
+									data.imageUrl === null ? defaultCocktailImg : data.imageUrl
+								}`}
+								className='w-full h-full object-cover'
+								alt='cocktail'
+							/>
 						</div>
 					</section>
 					<section className='px-4 lg:px-8 text-justify leading-6'>
@@ -68,7 +75,9 @@ export function CocktailDetailPage() {
 					</section>
 					<section className='overflow-hidden lg:h-[600px] lg:w-[600px] rounded-xl self-center justify-self-center hidden lg:block lg:ml-12'>
 						<img
-							src={`${data.imageUrl}`}
+							src={`${
+								data.imageUrl === null ? defaultCocktailImg : data.imageUrl
+							}`}
 							alt={`${data.name}`}
 							className='w-full h-full object-cover'
 						/>

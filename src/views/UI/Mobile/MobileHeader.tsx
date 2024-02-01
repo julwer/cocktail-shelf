@@ -1,8 +1,8 @@
-import Button from './Button';
-import smallLogoImg from '../../images/small-logo.png';
+import Button from '../Universal/Button';
+import smallLogoImg from '../../../images/small-logo.png';
 import { useEffect, useState } from 'react';
 import { MobileNav } from './MobileNav';
-import IconInput from './IconInput';
+import IconInput from '../Universal/IconInput';
 import { Link } from 'react-router-dom';
 
 type MobileHeaderProps = {
@@ -36,7 +36,7 @@ export function MobileHeader({ onSearch, searchInput }: MobileHeaderProps) {
 		if (onSearch) {
 			onSearch(debouncedValue);
 		}
-	}, [debouncedValue]);
+	}, [debouncedValue, onSearch]);
 
 	return (
 		<>

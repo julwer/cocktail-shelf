@@ -21,7 +21,7 @@ export function Snackbar({
 		}, duration);
 
 		return () => clearTimeout(timer);
-	}, []);
+	}, [duration]);
 
 	return (
 		<div

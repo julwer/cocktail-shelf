@@ -1,8 +1,7 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { isMobile } from '../../utils';
-import { CocktailForm } from '../components/CocktailForm';
-import { Header } from '../UI/Header';
-import { MobileHeader } from '../UI/MobileHeader';
+import { isMobile } from '../../utils/checkWindowWidth';
+import { CocktailForm } from '../components/CocktailForm/CocktailForm';
+import { Header } from '../UI/Universal/Header';
+import { MobileHeader } from '../UI/Mobile/MobileHeader';
 import { useScreenWidth } from '../../hooks/useScreenWidth';
 
 export function CreateCocktailPage() {

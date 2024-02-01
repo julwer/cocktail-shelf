@@ -1,9 +1,9 @@
 import { useScreenWidth } from '../../hooks/useScreenWidth';
 import catImg from '../../images/hiddencat.jpg';
-import { isMobile } from '../../utils';
-import { Header } from '../UI/Header';
-import MainText from '../UI/MainText';
-import { MobileHeader } from '../UI/MobileHeader';
+import { isMobile } from '../../utils/checkWindowWidth';
+import { Header } from '../UI/Universal/Header';
+import MainText from '../UI/Universal/MainText';
+import { MobileHeader } from '../UI/Mobile/MobileHeader';
 
 export function ErrorPage() {
 	const windowWidth: number = useScreenWidth();

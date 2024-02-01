@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
-import { clearTokens } from '../../authService';
-import { logout } from '../../app/state/auth/authSlice';
+import { clearTokens } from '../../../utils/authService';
+import { logout } from '../../../app/state/auth/authSlice';
 import { useDispatch } from 'react-redux';
 
 type MobileNavProps = {
