@@ -1,14 +1,14 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
-import LandingPage from './views/pages/Landing';
-import { HomePage } from './views/pages/Home';
-import { CocktailDetailPage } from './views/pages/CocktailDetail';
+import LandingPage from './views/pages/login/Login';
+import { HomePage } from './views/pages/home/Home';
+import { CocktailDetailPage } from './views/pages/cocktail-detail/CocktailDetail';
 
-import { ErrorPage } from './views/pages/Error';
-import { CreateCocktailPage } from './views/pages/CreateCocktail';
-import { YourCocktailsPage } from './views/pages/YourCocktails';
-import { SignupPage } from './views/pages/Signup';
-import { EditCocktailPage } from './views/pages/EditCocktail';
+import { ErrorPage } from './views/pages/error/Error';
+import { CreateCocktailPage } from './views/pages/create-cocktail/CreateCocktail';
+import { YourCocktailsPage } from './views/pages/your-cocktails/YourCocktails';
+import { SignupPage } from './views/pages/signup/Signup';
+import { EditCocktailPage } from './views/pages/edit-cocktail/EditCocktail';
 
 const router = createBrowserRouter([
 	{ path: '/', element: <LandingPage />, errorElement: <ErrorPage /> },
