@@ -4,7 +4,7 @@ import { SearchHeader } from '../../components/SearchHeader';
 import { CocktailList } from '../../components/cocktail-list/CocktailList';
 import { LoadingIndicator } from '../../components/LoadingIndicator';
 import { MobileHeader } from '../../components/mobile/MobileHeader';
-import { isMobile } from '../../../utils/checkWindowWidth';
+import { isMobile } from '../../../utils/checkWindowSize';
 import { useScreenWidth } from '../../../hooks/useScreenWidth';
 
 export function HomePage() {

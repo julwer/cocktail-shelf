@@ -1,6 +1,6 @@
 import { useScreenWidth } from '../../../hooks/useScreenWidth';
 import catImg from '../../../images/hiddencat.jpg';
-import { isMobile } from '../../../utils/checkWindowWidth';
+import { isMobile } from '../../../utils/checkWindowSize';
 import { Header } from '../../components/Header';
 import MainText from '../../components/MainText';
 import { MobileHeader } from '../../components/mobile/MobileHeader';

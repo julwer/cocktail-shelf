@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import Button from '../../../components/Button';
 import IconInput from '../../../components/IconInput';
 import { InputErrorInfo } from './InputErrorInfo';
@@ -20,8 +21,6 @@ export function IngredientsInput({
 	const formClasses: string =
 		'p-4 placeholder:text-second-txt text-main-txt cursor-pointer border border-2 border-outline border-solid p-3 mt-4 focus:outline-primary w-full rounded-full';
 
-	console.log(inputArray);
-
 	return (
 		<div className='flex flex-col w-full'>
 			<p className='text-main-txt text-xl font-bold'>Ingredients</p>
@@ -34,6 +33,7 @@ export function IngredientsInput({
 					placeholder='Enter Ingredient'
 					inputClassName={`${formClasses} ${
 						emptyIngredientArrayError && 'border-red focus:outline-red'
+					})
 					}`}
 					autocomplete='off'
 					name='ingredient'
@@ -53,4 +53,19 @@ export function IngredientsInput({
 			</Button>
 		</div>
 	);
+}
+
+export function validateIngredientInput(
+	inputArray: string[],
+	setError: React.Dispatch<React.SetStateAction<boolean>>
+) {
+	if (
+		inputArray.length === 0
+		// inputArray.length === 0
+		//  inputArray[0] === undefined ||
+		// inputArray[0].length === 0 ||
+		// inputArray[0] === ''
+	) {
+		setError(true);
+	}
 }

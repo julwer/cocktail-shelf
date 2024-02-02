@@ -1,4 +1,4 @@
-import { isMobile } from '../../../utils/checkWindowWidth';
+import { isMobile } from '../../../utils/checkWindowSize';
 import { CocktailForm } from './components/CocktailForm';
 import { Header } from '../../components/Header';
 import { MobileHeader } from '../../components/mobile/MobileHeader';

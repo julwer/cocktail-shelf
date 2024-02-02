@@ -1,6 +1,6 @@
 import { MobileHeader } from '../../components/mobile/MobileHeader';
 import inProgressImg from '../../../images/inprogress.gif';
-import { isMobile } from '../../../utils/checkWindowWidth';
+import { isMobile } from '../../../utils/checkWindowSize';
 import { Header } from '../../components/Header';
 import { useScreenWidth } from '../../../hooks/useScreenWidth';
 

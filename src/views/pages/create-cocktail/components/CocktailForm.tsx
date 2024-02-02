@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Input } from '../../../components/Input';
 import { useCreateCocktailMutation } from '../../../../redux/api/apiSlice';
 import { CreateCocktailRequest } from '../../../../types/apiDataTypes';
-import { IngredientsInput } from './IngredientsInput';
+import { IngredientsInput, validateIngredientInput } from './IngredientsInput';
 import { useNavigate } from 'react-router-dom';
 import { InputErrorInfo } from './InputErrorInfo';
 import { ImgFileInput } from './ImgFileInput';
@@ -38,12 +38,12 @@ export function CocktailForm() {
 		instructions: instructions,
 	};
 
-	function setIngredientInput(index: number, text: string) {
-		inputArray[index] = text;
-	}
-
 	function addIngredientInput() {
 		setInputArray([...inputArray, '']);
+	}
+
+	function setIngredientInput(index: number, text: string) {
+		inputArray[index] = text;
 	}
 
 	function removeIngredientInput(index: number) {
@@ -71,12 +71,10 @@ export function CocktailForm() {
 		if (description.length === 0 || description === '') {
 			setEmptyDescriptionError(true);
 		}
-		if (inputArray.length === 0) {
-			setEmptyIngredientArrayError(true);
-		}
 		if (instructions.length === 0 && instructions === '') {
 			setEmptyInstructionsError(true);
 		}
+		validateIngredientInput(inputArray, setEmptyIngredientArrayError);
 	}
 
 	function resetInputs() {

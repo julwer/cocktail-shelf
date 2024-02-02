@@ -3,7 +3,7 @@ import { useGetCocktailDetailsQuery } from '../../../redux/api/apiSlice';
 import { Header } from '../../components/Header';
 import { LoadingIndicator } from '../../components/LoadingIndicator';
 import { MobileHeader } from '../../components/mobile/MobileHeader';
-import { isMobile } from '../../../utils/checkWindowWidth';
+import { isMobile } from '../../../utils/checkWindowSize';
 import {
 	ReactElement,
 	JSXElementConstructor,
