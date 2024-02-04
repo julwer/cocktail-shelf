@@ -20,8 +20,6 @@ export function YourCocktailsActions({
 		navigate(`/edit/${id}`);
 	}
 
-	// znaleźć sposób żeby nie przekładać deleteCocktail i editCocktail aż z YourCoctailsPage
-
 	return (
 		<div className='box-content relative flex flex-row justify-end bottom-[95%] right-2'>
 			<Button

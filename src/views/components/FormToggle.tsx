@@ -15,6 +15,7 @@ export function FormToggler({ question, linkTo, linkText }: FormToggleProps) {
 		dispatch(emailChanged(''));
 		dispatch(passwordChanged(''));
 	}
+	
 	return (
 		<div className='flex flex-row m-2 text-l'>
 			<span className='px-3 text-main-txt'>{question}</span>

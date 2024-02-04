@@ -24,7 +24,7 @@ export function SearchHeader({ onSearch }: SearchHeaderProps) {
 	useEffect(() => {
 		onSearch(debouncedValue);
 	}, [debouncedValue, onSearch]);
-
+	
 	return (
 		<header className='flex flex-row items-center py-3 px-4 min-h-14'>
 			<Nav>

@@ -14,16 +14,13 @@ export default function Button({
 	type = 'button',
 	disabled,
 }: ButtonProps) {
-
 	return (
-		<>
-			<button
-				type={type}
-				className={className}
-				onClick={onClick}
-				disabled={disabled}>
-				{children}
-			</button>
-		</>
+		<button
+			type={type}
+			className={className}
+			onClick={onClick}
+			disabled={disabled}>
+			{children}
+		</button>
 	);
 }
