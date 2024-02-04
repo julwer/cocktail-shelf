@@ -2,7 +2,7 @@ import { Cookies } from 'typescript-cookie';
 import { LoginResponse } from '../types/apiDataTypes';
 import { jwtDecode } from 'jwt-decode';
 
-export const setTokens = (credentials: LoginResponse) => {
+export const setTokens = (credentials: LoginResponse | any) => {
 	const decoded: { exp: number } = jwtDecode(credentials.accessToken);
 	Cookies.set('accessToken', credentials.accessToken, {
 		expires: decoded.exp,

@@ -21,6 +21,10 @@ export function YourCocktailsPage() {
 	const windowWidth: number = useScreenWidth();
 
 	useEffect(() => {
+		refetch();
+	}, [refetch]);
+
+	useEffect(() => {
 		if (isSuccess) {
 			refetch();
 		}

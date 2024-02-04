@@ -57,15 +57,13 @@ export function IngredientsInput({
 
 export function validateIngredientInput(
 	inputArray: string[],
-	setError: React.Dispatch<React.SetStateAction<boolean>>
+	setError: React.Dispatch<React.SetStateAction<boolean>>,
+	index?: number,
 ) {
-	if (
-		inputArray.length === 0
-		// inputArray.length === 0
-		//  inputArray[0] === undefined ||
-		// inputArray[0].length === 0 ||
-		// inputArray[0] === ''
-	) {
+	if (inputArray.length === 0 || inputArray[0].length === 0) {
 		setError(true);
+	} 
+	else {
+		setError(false);
 	}
 }

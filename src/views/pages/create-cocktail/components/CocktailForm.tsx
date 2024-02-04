@@ -44,6 +44,7 @@ export function CocktailForm() {
 
 	function setIngredientInput(index: number, text: string) {
 		inputArray[index] = text;
+		validateIngredientInput(inputArray, setEmptyIngredientArrayError);
 	}
 
 	function removeIngredientInput(index: number) {
