@@ -48,16 +48,10 @@ export function LoginForm({ setIsLoginError }: LoginFormProps) {
 		event.preventDefault();
 		try {
 			await login(loginData).unwrap();
-		} catch (error) {
-			console.error('Login failed:', error);
-		}
-	};
-
-	useEffect(() => {
-		if (isError) {
+		} catch {
 			setIsLoginError(true);
 		}
-	}, [isError, setIsLoginError]);
+	};
 
 	useEffect(() => {
 		if (data) {

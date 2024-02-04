@@ -2,6 +2,7 @@ import {
 	BaseQueryFn,
 	FetchArgs,
 	FetchBaseQueryError,
+	FetchBaseQueryMeta,
 	createApi,
 	fetchBaseQuery,
 } from '@reduxjs/toolkit/query/react';
@@ -11,7 +12,11 @@ import {
 	LoginResponse,
 } from '../../types/apiDataTypes';
 import { CocktailModel } from '../../types/cocktailModel';
-import { getAccessToken, setTokens } from '../../utils/authService';
+import {
+	getAccessToken,
+	getRefreshToken,
+	setTokens,
+} from '../../utils/authService';
 import { QueryReturnValue } from '@reduxjs/toolkit/dist/query/baseQueryTypes';
 
 const baseQuery = fetchBaseQuery({
@@ -19,28 +24,49 @@ const baseQuery = fetchBaseQuery({
 	prepareHeaders: (headers) => {
 		const token = getAccessToken();
 		if (token) {
-			headers.set('Authorizarion', `Bearer ${token}`);
+			headers.set('Authorization', `Bearer ${token}`);
 		}
 		return headers;
 	},
 });
+
+function createRefreshBaseQuery(refreshToken: string): BaseQueryFn {
+return fetchBaseQuery({
+	baseUrl: 'https://drink-bar-408108.lm.r.appspot.com',
+	method: 'POST',
+	body: JSON.stringify({
+		refreshToken: refreshToken,
+	}),
+	headers: {
+		'Content-Type': 'application/json',
+	},
+});
+}
 
 const baseQueryWithReauth: BaseQueryFn<
 	string | FetchArgs,
 	unknown,
 	FetchBaseQueryError
 > = async (args, api, extraOptions) => {
-	let result: QueryReturnValue<unknown, FetchBaseQueryError, {}> =
-		await baseQuery(args, api, extraOptions);
+	let result: QueryReturnValue<
+		unknown,
+		FetchBaseQueryError,
+		FetchBaseQueryMeta
+	> = await baseQuery(args, api, extraOptions);
+	if (result.error && (result.error.data as any)?.message === 'token_expired') {
+		const refreshToken = getRefreshToken();
+		if (refreshToken) {
+			const refreshBaseQuery = createRefreshBaseQuery(refreshToken);
+			const refreshResult = await refreshBaseQuery(
+				'/user/refresh',
+				api,
+				extraOptions
+			);
 
-	if (result.error && result.error.status === 401) {
-		const refreshResult = await baseQuery('/user/refresh', api, extraOptions);
-
-		if (refreshResult.data) {
-			setTokens(refreshResult.data);
-			result = await baseQuery(args, api, extraOptions);
-		} else {
-			console.log('logged out because refresh token expired!');
+			if (refreshResult.data) {
+				setTokens(refreshResult.data);
+				result = await baseQuery(args, api, extraOptions);
+			}
 		}
 	}
 	return result;
@@ -70,9 +96,6 @@ export const api = createApi({
 		>({
 			query: ({ query, ownerId }) => ({
 				url: '/drink',
-				// headers: {
-				// 	Authorization: `Bearer ${getAccessToken()}`,
-				// },
 				params: {
 					query,
 					userId: ownerId,
@@ -82,18 +105,12 @@ export const api = createApi({
 		getCocktailDetails: builder.query<CocktailModel, string>({
 			query: (cocktailId: string) => ({
 				url: `drink/${cocktailId}`,
-				headers: {
-					Authorization: `Bearer ${getAccessToken()}`,
-				},
 			}),
 		}),
 		createCocktail: builder.mutation<CocktailModel, CreateCocktailRequest>({
 			query: (newCocktail: CreateCocktailRequest) => ({
 				url: 'drink',
 				method: 'POST',
-				// headers: {
-				// 	Authorization: `Bearer ${getAccessToken()}`,
-				// },
 				body: createCocktailRequestToFormData(newCocktail),
 			}),
 		}),
@@ -101,21 +118,9 @@ export const api = createApi({
 			query: (id: string) => ({
 				url: `drink/${id}`,
 				method: 'DELETE',
-				// headers: {
-				// 	Authorization: `Bearer ${getAccessToken()}`,
-				// },
+	
 			}),
 		}),
-
-		// getNewAccessToken: builder.mutation<LoginResponse, string>({
-		// 	query: (refreshToken: string) => ({
-		// 		url: '/user/refresh',
-		// 		method: 'POST',
-		// 		body: {
-		// 			refreshToken,
-		// 		},
-		// 	}),
-		// }),
 	}),
 });
 
@@ -123,7 +128,6 @@ export const {
 	useLoginMutation,
 	useGetCocktailsQuery,
 	useGetCocktailDetailsQuery,
-	// useGetNewAccessTokenMutation,
 	useCreateCocktailMutation,
 	useDeleteCocktailMutation,
 	useRegisterMutation,
